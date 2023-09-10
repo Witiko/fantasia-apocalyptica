@@ -1,0 +1,137 @@
+\RequirePackage{luatex85}
+\PassOptionsToPackage{shorthands=off}{babel}
+\makeatletter
+\disable@package@load{fontenc}
+\makeatother
+\let\oldlooseness=\looseness
+\documentclass{csbulletin}
+\selectlanguage{czech}
+\setcounter{secnumdepth}{3}
+\usepackage{luavlna}
+\usepackage[strict]{lua-widow-control}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=iso-numeric,
+  sortlocale=cs,
+  autolang=other,
+  bibencoding=UTF8,
+  mincitenames=2,
+  maxcitenames=2,
+]{biblatex}
+\addbibresource{main.bib}
+\usepackage{minted}
+\usemintedstyle{bw}
+\setminted{firstnumber=last, linenos}
+\newenvironment{mintedblock}{%
+  \par\vspace{\topsep}\vspace{\partopsep}%
+  \begingroup
+  \fvset{listparameters=\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}}%
+}{%
+  \endgroup
+  \par\vspace{\topsep}\vspace{\partopsep}%
+}
+\usepackage[
+  implicit=false,
+  hidelinks,
+]{hyperref}
+\newcommand\vref[1]{\ref{#1} na straně~\pageref{#1}}
+
+\newcommand\pkg{\textsf}
+\newcommand\acro[1]{\textsc{\MakeLowercase{#1}}}
+
+\begin{document}
+
+\singlechars{czech}{AaIiVvOoUuSsZzKk}
+
+\title{Příprava videozáznamu české premiéry multimediálního díla ,,Fantasia Apocalyptica``}
+\EnglishTitle{Recording the Czech premiere of the ``Fantasia Apocalyptica'' multimedia work}
+\author{Vít Starý Novotný}
+\podpis{Vít Starý Novotný, witiko@mail.muni.cz}
+\maketitle[1.5ex]
+
+\begin{abstract}
+11. října 2019 se při příležitosti oslav 25. výročí založení Fakulty informatiky Masarykovy univerzity uskutečnila česká premiéra multimediálního díla \emph{Fantasia Apocalyptica} za osobní účasti autora, Donalda Knutha. Z představení byl pořízen videozáznam, který je veřejně dostupný na YouTube kanálu Fakulty informatiky.
+
+V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru proběhlo veškeré zpracování pomocí svobodných nástrojů jako \TeX, Audacity, FFmpeg, \acro{MLT} a ImageMagick. V článku ukazuji, jak může čtenář tyto nástroje použít při přípravě vlastních záznamů.
+\end{abstract}
+\klicovaslova: audiovizuální záznam, zpracování videa, titulky, zpracování zvuku, kinetická typografie, \TeX, Audacity, FFMpeg, \acro{MLT}, ImageMagick, \acro{ASS}
+
+\bigskip
+
+11. října 2019 se v jezuitském kostele Nanebevzetí Panny Marie uskutečnila česká premiéra multimediálního díla \emph{Fantasia Apocalyptica}~\cite{knuth2023fantasia} za osobní účasti autora, Donalda Knutha. Z představení byl pořízen videozáznam, který je veřejně dostupný na YouTube kanálu Fakulty informatiky Masarykovy univerzity (\acro{FI~MU})~\cite{fimu2020czech}. Předchozí články ve Zpravodaji \CSTUG u popisují průběh představení~\cite{luptak2019fantasia} a přednášek Donalda Knutha při příležitosti návštěvy Brna~\cite{szaniszlo2020dva}. V tomto článku popisuji přípravu záznamu představení.
+
+Nejprve v sekci~\ref{sec:akvizice} popisuji akvizici a zpracování surových audiovizuálních dat. Následně v sekci~\vref{sec:uvodni-slovo-a-zaver} popisuji přípravu videozáznamu úvodního slova a závěru představení. Dále v sekci~\vref{sec:panely} popisuji přípravu panelů doprovázejících představení. Nakonec v sekci~\vref{sec:spojeni} popisuji spojení jednotlivých částí do výsledného záznamu. V sekci \vref{sec:zaver} shrnuji poznatky z článku a popisuji promítání hotového videozáznamu na \acro{FI~MU} 18. prosince 2019.
+
+\section{Akvizice a zpracování videa a zvuku}
+\label{sec:akvizice}
+
+TODO
+
+\subsection{Záznam videa}
+
+TODO
+
+\subsection{Zpracování videa}
+
+TODO
+
+\subsection{Záznam zvuku}
+
+TODO
+
+\subsection{Zpracování zvuku}
+
+TODO
+
+\section{Příprava videozáznamu úvodního slova a závěru}
+\label{sec:uvodni-slovo-a-zaver}
+
+TODO
+
+\subsection{Střih úvodního slova a závěru}
+
+TODO
+
+\subsection{Titulky úvodního slova}
+
+TODO
+
+\section{Příprava panelů doprovázejících varhanní oratorium}
+\label{sec:panely}
+
+TODO
+
+\subsection{Příprava panelu s trojjazyčným textem Zjevení Janova}
+
+TODO
+
+\subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
+
+TODO
+
+\subsection{Příprava panelu s notami pro varhany}
+
+TODO
+
+\section{Spojení jednotlivých částí do výsledného videa}
+\label{sec:spojeni}
+
+TODO
+
+\section{Závěr}
+\label{sec:zaver}
+
+TODO
+
+\printbibliography
+
+\begin{summary}
+On October 11, 2019, the Czech premiere of \emph{Fantasia Apocalyptica} was held for the 25th anniversary of Masaryk University's Faculty of Informatics, featuring its author, Donald Knuth. A video recording of the perfomance was taken and published at the YouTube channel of the Faculty of Informatics.
+
+In this article, I describe how the recording was prepared from processing the raw footage through replicating the panels that accompanied the performance to the final composition. Apart from the intro and wrap-up, only free open-source tools like \TeX, Audacity, FFMpeg, \acro{MLT}, and ImageMagick were used. In the article, I describe how readers can use these tools to create their own recordings.
+
+\keywords: footage acquisition, audio-visual production, subtitles, kinetic typography, \TeX, Audacity, FFMpeg, \acro{MLT}, ImageMagick, \acro{ASS}
+\end{summary}
+
+\end{document}
