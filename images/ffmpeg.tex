@@ -1,0 +1,74 @@
+\begingroup
+\noindent
+\definecolor{plantucolor0000}{RGB}{255,255,255}%
+\definecolor{plantucolor0001}{RGB}{0,0,0}%
+\definecolor{plantucolor0002}{RGB}{254,254,206}%
+\definecolor{plantucolor0003}{RGB}{168,0,54}%
+\begin{tikzpicture}[xscale=0.735,yscale=-0.735,
+,pstyle2/.style={fill=black,line width=0.5pt}
+,pstyle3/.style={color=plantucolor0003,fill=plantucolor0002,line width=0.75pt}
+,pstyle5/.style={color=plantucolor0003,line width=0.5pt}
+,pstyle6/.style={color=plantucolor0003,fill=plantucolor0003,line width=0.5pt}
+]
+\draw[color=black,fill=white,line width=0.75pt] (22pt,24pt) -- (183.0015pt,24pt) -- (190.0015pt,46.4473pt) -- (475pt,46.4473pt) -- (475pt,109pt) -- (22pt,109pt) -- (22pt,24pt) -- cycle;
+\draw[color=black,line width=0.75pt] (22pt,46.4473pt) -- (190.0015pt,46.4473pt);
+\node at (26pt,26pt)[below right,color=black]{\textbf{Stabilizace videa}};
+\draw[pstyle2] (48pt,76pt) ellipse (10pt and 10pt);
+\draw[pstyle3] (98pt,75.9844pt) arc (180:270:16.9844pt) -- (114.9844pt,59pt) -- (197.5795pt,59pt) arc (270:360:16.9844pt) -- (214.5639pt,75.9844pt) -- (214.5639pt,75.9844pt) arc (0:90:16.9844pt) -- (197.5795pt,92.9688pt) -- (114.9844pt,92.9688pt) arc (90:180:16.9844pt) -- (98pt,75.9844pt) -- cycle;
+\node at (108pt,69pt)[below right,color=black,xshift=-2.5pt,yshift=2pt]{\texttt{vidstabdetect}};
+\draw[pstyle3] (255pt,75.9844pt) arc (180:270:16.9844pt) -- (271.9844pt,59pt) -- (381.593pt,59pt) arc (270:360:16.9844pt) -- (398.5774pt,75.9844pt) -- (398.5774pt,75.9844pt) arc (0:90:16.9844pt) -- (381.593pt,92.9688pt) -- (271.9844pt,92.9688pt) arc (90:180:16.9844pt) -- (255pt,75.9844pt) -- cycle;
+\node at (265pt,69pt)[below right,color=black,xshift=0pt,yshift=2pt]{\texttt{vidstabtransform}};
+\draw[color=black,line width=0.5pt] (449pt,76pt) ellipse (10pt and 10pt);
+\draw[pstyle2] (449.0pt,76.0pt) ellipse (6pt and 6pt);
+\draw[pstyle5] (58.08pt,76pt) ..controls (66.28pt,76pt) and (79.13pt,76pt) .. (92.84pt,76pt);
+\draw[pstyle6] (97.92pt,76pt) -- (88.92pt,72pt) -- (92.92pt,76pt) -- (88.92pt,80pt) -- (97.92pt,76pt) -- cycle;
+\draw[pstyle5] (215.02pt,76pt) ..controls (226.1pt,76pt) and (237.86pt,76pt) .. (249.43pt,76pt);
+\draw[pstyle6] (254.73pt,76pt) -- (245.73pt,72pt) -- (249.73pt,76pt) -- (245.73pt,80pt) -- (254.73pt,76pt) -- cycle;
+\draw[pstyle5] (399.19pt,76pt) ..controls (412.23pt,76pt) and (424.54pt,76pt) .. (433.53pt,76pt);
+\draw[pstyle6] (438.68pt,76pt) -- (429.68pt,72pt) -- (433.68pt,76pt) -- (429.68pt,80pt) -- (438.68pt,76pt) -- cycle;
+\end{tikzpicture}%
+\par
+\medskip
+\noindent
+\begin{tikzpicture}[xscale=0.735,yscale=-0.735
+,pstyle2/.style={fill=black,line width=0.5pt}
+,pstyle3/.style={color=plantucolor0003,fill=plantucolor0002,line width=0.75pt}
+,pstyle5/.style={color=plantucolor0003,line width=0.5pt}
+,pstyle6/.style={color=plantucolor0003,fill=plantucolor0003,line width=0.5pt}
+]
+\draw[color=black,fill=white,line width=0.75pt] (69.11pt,24pt) -- (446.0715pt,24pt) -- (453.0715pt,46.4473pt) -- (541.11pt,46.4473pt) -- (541.11pt,163pt) -- (69.11pt,163pt) -- (69.11pt,24pt) -- cycle;
+\draw[pstyle5] (450.21pt,82.29pt) -- (499.93pt,99.39pt);
+\draw[pstyle5] (435.18pt,120.56pt) -- (500.07pt,106.58pt);
+\draw[color=black,line width=0.75pt] (69.11pt,46.4473pt) -- (453.0715pt,46.4473pt);
+\node at (73.11pt,26pt)[below right,color=black]{\textbf{Navýšení rozlišení a snímkové frekvence videa}};
+\draw[pstyle2] (95.11pt,100pt) ellipse (10pt and 10pt);
+\draw[pstyle3] (158.11pt,88pt) -- (170.11pt,100pt) -- (158.11pt,112pt) -- (146.11pt,100pt) -- (158.11pt,88pt) -- cycle;
+\draw[pstyle3] (243.11pt,129.9844pt) arc (180:270:16.9844pt) -- (260.0944pt,113pt) -- (281.7772pt,113pt) arc (270:360:16.9844pt) -- (298.7616pt,129.9844pt) -- (298.7616pt,129.9844pt) arc (0:90:16.9844pt) -- (281.7772pt,146.9688pt) -- (260.0944pt,146.9688pt) arc (90:180:16.9844pt) -- (243.11pt,129.9844pt) -- cycle;
+\node at (253.11pt,123pt)[below right,color=black,xshift=-3.5pt,yshift=2pt]{\texttt{yadif}};
+\draw[pstyle3] (369.11pt,129.9844pt) arc (180:270:16.9844pt) -- (386.0944pt,113pt) -- (428.0685pt,113pt) arc (270:360:16.9844pt) -- (445.0529pt,129.9844pt) -- (445.0529pt,129.9844pt) arc (0:90:16.9844pt) -- (428.0685pt,146.9688pt) -- (386.0944pt,146.9688pt) arc (90:180:16.9844pt) -- (369.11pt,129.9844pt) -- cycle;
+\node at (379.11pt,123pt)[below right,color=black,xshift=0pt,yshift=2.5pt]{waifu2x};
+\draw[color=black,line width=0.5pt] (515.11pt,103pt) ellipse (10pt and 10pt);
+\draw[pstyle2] (515.11pt,103.0pt) ellipse (6pt and 6pt);
+\draw[pstyle3] (233.11pt,75.9844pt) arc (180:270:16.9844pt) -- (250.0944pt,59pt) -- (292.0685pt,59pt) arc (270:360:16.9844pt) -- (309.0529pt,75.9844pt) -- (309.0529pt,75.9844pt) arc (0:90:16.9844pt) -- (292.0685pt,92.9688pt) -- (250.0944pt,92.9688pt) arc (90:180:16.9844pt) -- (233.11pt,75.9844pt) -- cycle;
+\node at (243.11pt,69pt)[below right,color=black,xshift=0pt,yshift=2.5pt]{waifu2x};
+\draw[pstyle3] (350.11pt,75.9844pt) arc (180:270:16.9844pt) -- (367.0944pt,59pt) -- (446.7256pt,59pt) arc (270:360:16.9844pt) -- (463.71pt,75.9844pt) -- (463.71pt,75.9844pt) arc (0:90:16.9844pt) -- (446.7256pt,92.9688pt) -- (367.0944pt,92.9688pt) arc (90:180:16.9844pt) -- (350.11pt,75.9844pt) -- cycle;
+\node at (360.11pt,69pt)[below right,color=black,xshift=-0.5pt,yshift=2pt]{\texttt{minterpolate}};
+\draw[pstyle5] (105.11pt,100pt) ..controls (114.45pt,100pt) and (129.27pt,100pt) .. (140.7pt,100pt);
+\draw[pstyle6] (146pt,100pt) -- (137pt,96pt) -- (141pt,100pt) -- (137pt,104pt) -- (146pt,100pt) -- cycle;
+\node at (-11.2958pt,118.2467pt)[below right,color=black,xshift=63pt,yshift=50pt]{Je video prokládané?};
+\draw[pstyle5] (167.15pt,103.49pt) ..controls (173.34pt,106.09pt) and (182.16pt,109.58pt) .. (190.11pt,112pt) ..controls (205.51pt,116.69pt) and (222.92pt,120.75pt) .. (237.56pt,123.82pt);
+\draw[pstyle6] (242.82pt,124.9pt) -- (234.8016pt,119.1811pt) -- (237.921pt,123.9002pt) -- (233.2019pt,127.0196pt) -- (242.82pt,124.9pt) -- cycle;
+\node at (191.11pt,99pt)[below right,color=black,yshift=-15pt]{ano};
+\draw[pstyle5] (299.23pt,130pt) ..controls (317.77pt,130pt) and (342.74pt,130pt) .. (363.87pt,130pt);
+\draw[pstyle6] (368.88pt,130pt) -- (359.88pt,126pt) -- (363.88pt,130pt) -- (359.88pt,134pt) -- (368.88pt,130pt) -- cycle;
+\draw[pstyle6] (505.17pt,105.28pt) -- (495.4639pt,103.6091pt) -- (500.3227pt,106.5061pt) -- (497.4257pt,111.3648pt) -- (505.17pt,105.28pt) -- cycle;
+\draw[pstyle5] (168.19pt,98.04pt) ..controls (181.24pt,95.22pt) and (206.12pt,89.83pt) .. (228.04pt,85.1pt);
+\draw[pstyle6] (232.95pt,84.03pt) -- (223.3076pt,82.0238pt) -- (228.0631pt,85.0874pt) -- (224.9995pt,89.8429pt) -- (232.95pt,84.03pt) -- cycle;
+\node at (194.11pt,76pt)[below right,color=black,yshift=-12.5pt]{ne};
+\draw[pstyle5] (309.44pt,76pt) ..controls (320.41pt,76pt) and (332.72pt,76pt) .. (344.78pt,76pt);
+\draw[pstyle6] (349.93pt,76pt) -- (340.93pt,72pt) -- (344.93pt,76pt) -- (340.93pt,80pt) -- (349.93pt,76pt) -- cycle;
+\draw[pstyle6] (505.03pt,100.69pt) -- (497.2899pt,94.5997pt) -- (500.1835pt,99.4605pt) -- (495.3227pt,102.3541pt) -- (505.03pt,100.69pt) -- cycle;
+\end{tikzpicture}%
+\par
+\vspace{-6pt}%
+\endgroup

@@ -4,6 +4,9 @@ Tento repozitář obsahuje zdrojový kód článku *Příprava videozáznamu če
 premiéry multimediálního díla „Fantasia Apocalyptica“*, který se chystám
 zveřejnit ve Zpravodaji CSTUGu.
 
+Pro sazbu článku potřebujeme unixový systém s nainstalovanými programy
+FFmpeg, GNU Make, ImageMagick a OptiPNG.
+
 PDF dokument [`main.pdf`][1] s textem článku vysázíme následujím příkazem:
 
 ``` bash
