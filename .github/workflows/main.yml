@@ -1,6 +1,8 @@
 name: Typeset paper
 on:
   push:
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 env:
@@ -16,6 +18,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Install requirements
+        run: |
+          set -e
+          apt-get -qy update
+          apt-get -qy install --no-install-recommends ffmpeg make imagemagick optipng
+      - name: Typeset images for figures
+        run: make -C images/frames/
       - name: Typeset paper
         run: latexmk -lualatex -shell-escape main.tex
       - name: Upload artifacts

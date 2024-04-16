@@ -1,0 +1,25 @@
+% Based on:
+% - https://tex.stackexchange.com/a/306881/70941
+% - https://tex.stackexchange.com/a/307097/70941
+\RequirePackage{atbegshi,rotating,zref-abspage,zref-user}
+\newcommand{\rotateFigurePageForLabel}[1]{%
+  \zlabel{#1}%
+  \AtBeginShipout{%
+  \ifnum\c@page=\zref@extractdefault{#1}{abspage}{0}
+    \ifodd\c@page
+      \pdfpageattr{/Rotate 90}%
+    \else
+      \pdfpageattr{/Rotate 270}%
+    \fi
+  \fi}
+}%
+\newenvironment{sideways-figure}[1]{%
+  \begin{sidewaysfigure}%
+    \def\sideways@figure@label{#1}%
+}{%
+    \expandafter\label\expandafter{%
+      \sideways@figure@label}%
+    \expandafter\rotateFigurePageForLabel\expandafter{%
+      \sideways@figure@label}%
+  \end{sidewaysfigure}%
+}%

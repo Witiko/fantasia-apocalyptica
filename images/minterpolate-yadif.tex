@@ -1,0 +1,37 @@
+\begingroup
+\begin{subfigure}{\linewidth}
+\input images/camcorder
+\vspace{-10pt}
+\caption{Při záznamu videa na digitální kameru dochází k zachycení mnoha snímků za vteřinu.}
+\end{subfigure}
+\setkeys{Gin}{width=28.74615pt,height=28.74615pt}%
+\par\vspace{10pt}%
+\begin{subfigure}[t]{0.49\linewidth}
+\input images/frames/input-progressive-frames
+\caption{U videa v neprokládaném formátu (vlevo nahoře) obsahují snímky obraz pro daný okamžik. U videa v prokládaném formátu (vpravo nahoře) obsahují snímky dva půlsnímky v polovičním rozlišení (vpravo) s obrazem ze dvou sousedních okamžiků.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\linewidth}
+\input images/frames/input-interlaced-frames
+\par\vspace{8pt}%
+\input images/frames/input-uninterlaced-subframes-flat
+\end{subfigure}
+\par\vspace{10pt}%
+\begin{subfigure}[t]{0.49\linewidth}
+\begin{verbatim}
+$ ffmpeg -i vstupní-video.mp4 \
+>        -vf minterpolate     \
+>        výstupní-video.mp4
+\end{verbatim}
+\input images/frames/output-minterpolate-frames
+\caption{Filtr \texttt{minterpolate} dokáže u neprokládaných videí odhadnout obraz v mezilehlých okamžicích podle okolních snímků.\footnotemark}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\linewidth}
+\begin{verbatim}
+$ ffmpeg -i vstupní-video.mp4 \
+>        -vf yadif=send_field \
+>        výstupní-video.mp4
+\end{verbatim}
+\input images/frames/output-yadif-frames
+\caption{Filtr \texttt{yadif} dokáže u prokládaných videí zdvojnásobit rozlišení půlsnímků podle daného půlsnímku a jeho sousedů.}
+\end{subfigure}
+\endgroup
