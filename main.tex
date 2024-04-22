@@ -6,7 +6,7 @@
 \let\oldlooseness=\looseness
 \documentclass{csbulletin}
 \setcounter{secnumdepth}{3}
-\usepackage{luavlna, float}
+\usepackage{luavlna,float}
 \usepackage[strict]{lua-widow-control}
 
 \usepackage{minted}
@@ -38,6 +38,7 @@
 \usepackage{sideways-figure, graphicx, afterpage, subcaption, tikz}
 \graphicspath{{./images/}}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.pathmorphing}
 
 \usepackage[
   implicit=false,
@@ -103,7 +104,7 @@ Video představení zaznamenal Pavel Šiler na kameru Sony~\acro{PXW-X70}. Video
 Ačkoliv jsem video obdržel v rozlišení $1920\times1080$\,px a s frekvencí 25 snímků za vteřinu, od výsledného videozáznamu se očekávalo alespoň dvojnásobné rozlišení \acro{4K} a frekvence 50 snímků za vteřinu.
 Zatímco záznamy přednášek jsem obdržel v prokládaném (tzv. ,,interlaced``) formátu, záběry kostela, varhan a úvodní slovo jsem obdržel v neprokládaném (tzv. ,,progressive``) formátu. Zatímco záznamy přednášek a úvodní slovo byly zabírány ze stativu, záběry kostela a varhan byly pořízeny z ruky. Cílem zpracování videa bylo nejen navýšení rozlišení a snímkové frekvence, ale i sjednocení formátu videa a stabilizace záběrů z ruky.
 
-Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným nástrojem waifu2x~\cite{waifu2x}, vizte obrázky~\ref{fig:ffmpeg-waifu2x} a~\ref{fig:minterpolate-yadif}. Nejprve jsem stabilizoval záběry z ruky filtry \texttt{vidstabdetect}~\cite{vidstabdetect} a~\texttt{vidstab\discretionary{\textrm{-}}{}{}transform}~\cite{vidstabtransform} nástroje FFmpeg. Následně jsem navýšil rozlišení a snímkovou frekvenci následně:
+Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným nástrojem waifu2x~\cite{waifu2x}, vizte obrázky~\ref{fig:ffmpeg-waifu2x}--\ref{fig:minterpolate-yadif}. Nejprve jsem stabilizoval záběry z ruky filtry \texttt{vidstabdetect}~\cite{vidstabdetect} a~\texttt{vidstab\discretionary{\textrm{-}}{}{}transform}~\cite{vidstabtransform} nástroje FFmpeg. Následně jsem navýšil rozlišení a snímkovou frekvenci následně:
 \begin{itemize}
 \item U neprokládaných videí jsem nejprve navýšil rozlišení nástrojem waifu2x. Následně jsem navýšil snímkovou frekvenci filtrem \texttt{minterpolate}~\cite{minterpolate} nástroje FFmpeg, který chybějící snímky interpoluje podle okolních snímků.
 \item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpuje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
@@ -115,6 +116,12 @@ Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným n�
 \caption{Diagram aktivit zpracování videa pomocí nástrojů FFmpeg a waifu2x.}
 \label{fig:ffmpeg-waifu2x}
 \end{figure}
+
+\begin{figure}[H]
+\input images/vidstabdetect-vidstabtransform
+\caption{Stabilizace videa pomocí filtrů nástroje FFmpeg.}
+\label{fig:vidstabdetect-vidstabtransform}
+\end{figure}%
 
 \begin{figure}[H]
 \input images/minterpolate-yadif

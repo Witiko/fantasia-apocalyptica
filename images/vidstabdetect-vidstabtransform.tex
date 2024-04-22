@@ -1,0 +1,21 @@
+\begingroup
+\begin{subfigure}{\linewidth}
+\input images/camcorder-vidstabdetect-vidstabtransform
+\vspace{-4pt}
+\input images/frames/input-progressive-frames-shaky
+\caption{Při záznamu videa z ruky může vzniknout záznam s roztřeseným obrazem.}
+\end{subfigure}
+\setkeys{Gin}{width=28.74615pt,height=28.74615pt}%
+\par\vspace{10pt}%
+\begin{subfigure}{\linewidth}
+\begingroup
+\small
+\begin{verbatim}
+$ ffmpeg -i vstupní-video.mp4 -vf vidstabdetect -f null -
+$ ffmpeg -i vstupní-video.mp4 -vf vidstabtransform výstupní-video.mp4
+\end{verbatim}
+\endgroup
+\input images/frames/output-vidstabtransform-frames
+\caption{Filtry \texttt{vidstabdetect} a \texttt{vidstabtransform} izolují a eliminují rychlé pohyby kamery. Dále dochází k přiblížení obrazu tak, aby nebyly viditelné okraje záběru.}
+\end{subfigure}
+\endgroup
