@@ -5,8 +5,8 @@
 \input images/frames/input-progressive-frames-shaky
 \caption{Při záznamu videa z ruky může vzniknout záznam s roztřeseným obrazem.}
 \end{subfigure}
+\par\vspace{7.5pt}%
 \setkeys{Gin}{width=28.74615pt,height=28.74615pt}%
-\par\vspace{10pt}%
 \begin{subfigure}{\linewidth}
 \begingroup
 \small
@@ -16,6 +16,6 @@ $ ffmpeg -i vstupní-video.mp4 -vf vidstabtransform výstupní-video.mp4
 \end{verbatim}
 \endgroup
 \input images/frames/output-vidstabtransform-frames
-\caption{Filtry \texttt{vidstabdetect} a \texttt{vidstabtransform} izolují a eliminují rychlé pohyby kamery. Dále dochází k přiblížení obrazu tak, aby nebyly viditelné okraje záběru.}
+\caption{Filtry \texttt{vidstabdetect} a \texttt{vidstabtransform} izolují a odstraňují rychlé pohyby kamery. Dále dochází k přiblížení obrazu tak, aby nebyly viditelné okraje záběru.}
 \end{subfigure}
 \endgroup

@@ -1,0 +1,23 @@
+\vspace{-15pt}%
+\begingroup
+\setkeys{Gin}{width=28.74615pt,height=28.74615pt,interpolate=false}%
+\begin{subfigure}{\linewidth}
+\input images/frames/output-vidstabtransform-frames-1x
+\caption{Obraz zachycený digitální kamerou může mít nedostatečné rozlišení.}
+\end{subfigure}
+\begin{subfigure}{\linewidth}
+\par\vspace{7.5pt}%
+\begingroup
+\small
+\begin{verbatim}
+$ ffmpeg -i vstupní-video.mp4 -f image2 obrázky-snímků/%06d.png
+$ find obrázky-snímků/ -name '*.png' | sort > obrázky-snímků.txt
+$ th waifu2x.lua -l obrázky-snímků.txt -model_dir models/photo \
+>                -tta 1 -tta_level 8 -o zvětšené-obrázky/%06d.png
+$ ffmpeg -framerate 25 zvětšené-obrázky/%06d.png výstupní-video.mp4
+\end{verbatim}
+\endgroup
+\input images/frames/output-waifu2x-frames
+\caption{Nástroj waifu2x dokáže zvýšit rozlišení obrazu pomocí umělých neuronových sítí~\cite{dong2016image}.}
+\end{subfigure}
+\endgroup

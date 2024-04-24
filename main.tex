@@ -110,45 +110,7 @@ Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným n�
 \item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpuje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
 \end{itemize}
 
-\begin{figure}[b!]
-\vspace{-10pt}
-\input images/ffmpeg
-\caption{Diagram aktivit zpracování videa pomocí nástrojů FFmpeg a waifu2x.}
-\label{fig:ffmpeg-waifu2x}
-\end{figure}
-
-\begin{figure}[H]
-\input images/vidstabdetect-vidstabtransform
-\caption{Stabilizace videa pomocí filtrů nástroje FFmpeg.}
-\label{fig:vidstabdetect-vidstabtransform}
-\end{figure}%
-
-\begin{figure}[H]
-\input images/minterpolate-yadif
-\caption{Navýšení snímkové frekvence videa pomocí filtrů nástroje FFmpeg.}
-\label{fig:minterpolate-yadif}
-\end{figure}%
-\begin{filecontents}[overwrite,nosearch,noheader]{example-minterpolate-frames-01.sh}
-$ ffmpeg -i vstupní-video.mp4 -vf minterpolate obrázky-snímků/%06d.png
-\end{filecontents}
-\begin{filecontents}[overwrite,nosearch,noheader]{example-minterpolate-frames-02.sh}
-$ ffmpeg -framerate 50 obrázky-snímků/%06d.png výstupní-video.mp4
-\end{filecontents}
-\footnotetext{Při rychlém pohybu kamery nebo zabíraného objektu mohou při použití filtru \texttt{minterpolate} vznikat vizuální artefakty, především na okrajích snímků a objektů. Při zpracování přednášek Donalda Knutha na \acro{FI MU} jsem proto ze vstupního videa nejprve vytvořil obrázky snímků:
-\begin{mintedblock}
-\inputminted{bash}{example-minterpolate-frames-01.sh}
-\end{mintedblock}
-\noindent
-Následně jsem obrázky snímků ručně prošel a smazal jsem ty, na kterých byly viditelné artefakty na osobě Donalda Knutha. Nakonec jsem z obrázků snímků vytvořil výsledné video:
-\begin{mintedblock}
-\inputminted{bash}{example-minterpolate-frames-02.sh}
-\end{mintedblock}
-\noindent
-Video mělo proměnlivou frekvenci 25--50 snímků za vteřinu podle počtu smazaných obrázků snímků v dané části videa.}
-
-% TODO: Přidat ilustraci superrozlišení nástroje waifu2x:
-% - https://is.muni.cz/el/fi/podzim2020/PV212/index.qwarp?prejit=5595949
-% - https://nlp.fi.muni.cz/raslan/2021/paper4.pdf
+\input images/ffmpeg-waifu2x
 
 \subsection{Záznam zvuku}
 Zvuk představení byl zaznamenán šesti mikrofony:
