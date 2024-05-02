@@ -82,9 +82,9 @@
 \begin{abstract}
 11. října 2019 se při příležitosti oslav 25. výročí založení Fakulty informatiky Masarykovy univerzity uskutečnila česká premiéra multimediálního díla \emph{Fantasia Apocalyptica} za osobní účasti autora, Donalda Knutha. Z představení byl pořízen videozáznam, který je veřejně dostupný na YouTube kanálu Fakulty informatiky.
 
-V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru a navýšení rozlišení videa proběhlo veškeré zpracování pomocí svobodných nástrojů jako \TeX, Audacity, FFmpeg, \acro{MLT} a ImageMagick. V článku ukazuji, jak může čtenář tyto nástroje použít při přípravě vlastních záznamů.
+V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru, navýšení rozlišení videa a zúžení dynamického rozsahu zvuku proběhlo veškeré zpracování pomocí svobodných nástrojů jako \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT} a ImageMagick. V článku ukazuji, jak může čtenář tyto nástroje použít při přípravě vlastních záznamů.
 \end{abstract}
-\klicovaslova: audiovizuální záznam, zpracování videa, titulky, zpracování zvuku, kinetická typografie, \TeX, Audacity, FFmpeg, \acro{MLT}, ImageMagick, waifu2x, \acro{ASS}
+\klicovaslova: audiovizuální záznam, zpracování videa, titulky, zpracování zvuku, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, waifu2x
 
 \bigskip
 
@@ -97,7 +97,7 @@ Nejprve v sekci~\ref{sec:akvizice} popisuji akvizici a zpracování surových au
 Video a zvuk představení zaznamenali a předzpracovali Petr Šiler, Petr „Tudy“ Holubář a studenti z laboratoře \acro{LEMMA}~\cite{LEMMA}. Následně jsem u videa sjednotil formát dat a do zvuku představení jsem přimíchal zvuky okolí a úvodní slovo Jiřího Zlatušky.
 
 \subsection{Záznam videa}
-Video představení zaznamenal Pavel Šiler na kameru Sony~\acro{PXW-X70}. Video zahrnuje přednášky Donalda Knutha na \acro{FI MU}~\autocites{2019-10-08-video-Knuth-QA1-Sony-Siler}{2019-10-09-video-Knuth-QA2-Sony-Siler}[adresář~\texttt{staticka/}]{2019-10-11-video-Fantasia-apocalyptica-Sony-Siler}, záběry kostela a varhan a úvodní slovo Jiřího Zlatušky.
+Video představení zaznamenal Pavel Šiler na kameru Sony~\acro{PXW-X70}. Video zahrnuje přednášky Donalda Knutha na \acro{FI~MU}~\autocites{2019-10-08-video-Knuth-QA1-Sony-Siler}{2019-10-09-video-Knuth-QA2-Sony-Siler}[adresář~\texttt{staticka/}]{2019-10-11-video-Fantasia-apocalyptica-Sony-Siler}, záběry kostela a varhan a úvodní slovo Jiřího Zlatušky.
 
 \vspace{-10pt}
 \subsection{Zpracování videa}
@@ -107,20 +107,20 @@ Zatímco záznamy přednášek jsem obdržel v prokládaném (tzv. ,,interlaced`
 Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným nástrojem waifu2x~\cite{waifu2x}, vizte obrázky~\ref{fig:ffmpeg-waifu2x}--\ref{fig:minterpolate-yadif}. Nejprve jsem stabilizoval záběry z ruky filtry \texttt{vidstabdetect}~\cite{vidstabdetect} a~\texttt{vidstab\discretionary{\textrm{-}}{}{}transform}~\cite{vidstabtransform} nástroje FFmpeg. Následně jsem navýšil rozlišení a snímkovou frekvenci následně:
 \begin{itemize}
 \item U neprokládaných videí jsem nejprve navýšil rozlišení nástrojem waifu2x. Následně jsem navýšil snímkovou frekvenci filtrem \texttt{minterpolate}~\cite{minterpolate} nástroje FFmpeg, který chybějící snímky interpoluje podle okolních snímků.
-\item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpuje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
+\item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpoluje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
 \end{itemize}
 
 \input images/ffmpeg-waifu2x
 
 \subsection{Záznam zvuku}
-Zvuk představení byl zaznamenán šesti mikrofony:
+Zvuk představení byl zaznamenán pěti mikrofony:
 \begin{itemize}
-    \item \textls[-2]{Dva mikrofony Zoom \acro{H1}~\cite{2019-10-11-audio-Fantasia-apocalyptica-ZoomH1-TS} byly umístěny na řečnickém pultu a nad panely.}
-    \item Dva mikrofony Oktava~\acro{MK012}~\cite[soubor~\texttt{ORTF-MK012\_nearReversed.flac}]{2019-10-11-audio-Fantasia-apocalyptica-Mix-Tudio} byly umístěny na kůru a namířeny do kostela.
+    \item \textls[-2]{Dva mikrofony Zoom~\acro{H1}~\cite{2019-10-11-audio-Fantasia-apocalyptica-ZoomH1-TS} byly umístěny na řečnickém pultu a nad panely.}
+    \item Dva mikrofony Oktava~\acro{MK012}~\cite[soubor~\texttt{ORTF-MK012\_nearReversed.flac}]{2019-10-11-audio-Fantasia-apocalyptica-Mix-Tudio} \textls[-15]{byly zapojeny do rekordéru Zoom~\acro{H4}, umístěny na kůru a namířeny do kostela.}
     \item Mikrofon Roland~\acro{R26}~\cite{2019-10-11-audio-Fantasia-apocalyptica-RolandR26zLemma-organ} a mikrofon kamery Sony~\acro{PXW-X70}~\cite{2019-10-11-audio-Fantasia-apocalyptica-Sony-Siler} byly umístěny na kůru a namířeny na varhany.
 \end{itemize}
 
-Zvuk předzpracoval Petr „Tudy“ Holubář~\cite{2019-10-11-audio-Fantasia-apocalyptica-Mix-Tudio}. Hlavním vstupem jeho mixu byl prostorový záznam z mikrofonů Oktava~\acro{MK012}, do kterého pro konkrétnost lehce přimíchal přímý záznam varhan z mikrofonu Roland~\acro{R26}. Pro zúžení dynamického rozsahu použil Petr analogový kompresor Hammerwave.
+Zvuk předzpracoval Petr „Tudy“ Holubář~\cite{2019-10-11-audio-Fantasia-apocalyptica-Mix-Tudio}. Hlavním vstupem jeho mixu byl prostorový záznam z mikrofonů Oktava~\acro{MK012}. Do prostorového záznamu Petr pro konkrétnost lehce přimíchal přímý záznam varhan z mikrofonu Roland~\acro{R26}, který frekvenčně ošetřil tak, aby se neprojevily nežádoucí fázové posuny ve spodním pásmu. Pro zúžení dynamického rozsahu použil Petr digitální \acro{VST} modul \acro{SSL}~G-Master Buss Compressor~\cite{ssl-g-master-buss-compressor} od izraelské firmy Waves Audio.
 
 \subsection{Zpracování zvuku}
 Zvuk jsem zpracoval svobodným programem Audacity~\cite{2019-11-19-audio-Fantasia-apocalyptica-Mix-Novotny,2019-12-09-audio-Fantasia-apocalyptica-Mix-Novotny}, vizte Obrázek~\ref{fig:audacity}.%
@@ -128,17 +128,29 @@ Zvuk jsem zpracoval svobodným programem Audacity~\cite{2019-11-19-audio-Fantasi
 \includegraphics[width=\linewidth]{audacity}
 \caption{Zpracování zvuku ve svobodném programu Audacity. Výsledný mix zahrnuje zvuk zvonu (nahoře), předzpracovaný zvuk představení od Petra „Tudy“ Holubáře (druhý odshora) a úvodní slovo Jiřího Zlatušky (uprostřed) podkreslené zvuky okolí (dole).}
 \end{sideways-figure}
-Výsledný mix zahrnuje svobodný zvuk zvonu kostnické katedrály~\cite{edsward2016church}, předzpracovaný zvuk představení od Petra Holubáře a úvodní slovo Jiřího Zlatušky podkreslený zvuky okolí z mikrofonů Oktava~\acro{MK012}.
+Výsledný mix zahrnuje svobodný zvuk zvonu kostnické katedrály~\cite{edsward2016church}, předzpracovaný zvuk představení od Petra Holubáře a úvodní slovo Jiřího Zlatušky podkreslené zvuky okolí z mikrofonů Oktava~\acro{MK012}.
 
 \section{Příprava videozáznamu úvodního slova a závěru}
 \label{sec:uvodni-slovo-a-zaver}
-TODO
+Videozáznam úvodního slova a závěru jsem připravil se Šimonem Mačejovským.
 
 \subsection{Střih úvodního slova a závěru}
-TODO
+Videozáznamy úvodního slova a závěru~\cite{2019-12-24-video-strih-4k-Macejovsky} připravil Šimon Mačejovský nástrojem Sony Vegas 15. Videozáznam obsahuje záběry z přednášek Donalda Knutha na \acro{FI~MU}, záběry kostela a varhan, úvodní slovo Jiřího Zlatušky a fotografie od Martiny Morávkové~\cite{2019-10-08-foto-dek1-Morávková}.
 
 \subsection{Titulky úvodního slova}
-TODO
+\begin{filecontents}[overwrite,nosearch,noheader]{example-ass.sh}
+$ ffmpeg -i vstupní-video.mp4 -vf ass=vstupní-titulky.ass video-s-titulky.mp4
+\end{filecontents}
+Úvodní slovo Jiřího Zlatušky jsem opatřil titulky ve formátu \acro{ASS}\footnote{Pro vypálení titulků do obrazu videa slouží filtr \texttt{ass} nástroje FFmpeg:
+\begin{mintedblock}
+\inputminted{bash}{example-ass.sh}
+\end{mintedblock}
+\noindent
+Filtr \texttt{ass}~\cite{ass} implementuje softwarová knihovna \texttt{libass}~\cite{libass}, která ve výchozím nastavení nepoužívá kerningovou tabulku použitého písma~\cite{enable-kerning-by-default}. Pro použití kerningové tabulky je třeba do sekce \texttt{[Script Info]} souboru \texttt{vstupní-titulky.ass} přidat řádek \texttt{Kerning: yes}.}~\cite{2019-12-12-titulky-Novotny}, které jsem připravil ve svobodném nástroji Aegisub~\cite{aegisub}, vizte Obrázek~\ref{fig:aegisub}.
+\begin{sideways-figure}{fig:aegisub}
+\includegraphics[width=\linewidth]{aegisub}
+\caption{Příprava titulků úvodního slova ve svobodném programu Aegisub.}
+\end{sideways-figure}
 
 \section{Příprava panelů doprovázejících varhanní oratorium}
 \label{sec:panely}
@@ -169,9 +181,9 @@ TODO
 \begin{summary}
 On October 11, 2019, the Czech premiere of \emph{Fantasia Apocalyptica} was held for the 25th anniversary of Masaryk University's Faculty of Informatics, featuring its author, Donald Knuth. A video recording of the perfomance was taken and published at the YouTube channel of the Faculty of Informatics.
 
-In this article, I describe how the recording was prepared from processing the raw footage through replicating the panels that accompanied the performance to the final composition. Apart from super-resolution imaging and the editing of the intro and the wrap-up, only free open-source tools like \TeX, Audacity, FFmpeg, \acro{MLT}, and ImageMagick were used. In the article, I describe how readers can use these tools to create their own recordings.
+In this article, I describe how the recording was prepared from processing the raw footage through replicating the panels that accompanied the performance to the final composition. Apart from super-resolution imaging, the editing of the intro and the wrap-up, and the compression of sound, only free open-source tools like \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT}, and ImageMagick were used. In the article, I describe how readers can use these tools to create their own recordings.
 
-\keywords: footage acquisition, audio-visual production, subtitles, kinetic typography, \TeX, Audacity, FFmpeg, \acro{MLT}, ImageMagick, waifu2x, \acro{ASS}
+\keywords: footage acquisition, audio-visual production, subtitles, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, waifu2x
 \end{summary}
 
 \end{document}
