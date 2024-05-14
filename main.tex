@@ -79,10 +79,11 @@
 \selectlanguage{czech}
 \singlechars{czech}{AaIiVvOoUuSsZzKk}
 
+\vspace{-15pt}
 \begin{abstract}
 11. října 2019 se při příležitosti oslav 25. výročí založení Fakulty informatiky Masarykovy univerzity uskutečnila česká premiéra multimediálního díla \emph{Fantasia Apocalyptica} za osobní účasti autora, Donalda Knutha. Z představení byl pořízen videozáznam, který je veřejně dostupný na YouTube kanálu Fakulty informatiky.
 
-V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru, navýšení rozlišení videa a zúžení dynamického rozsahu zvuku proběhlo veškeré zpracování pomocí svobodných nástrojů jako \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT} a ImageMagick. V článku ukazuji, jak může čtenář tyto nástroje použít při přípravě vlastních záznamů.
+V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru, navýšení rozlišení videa a zúžení dynamického rozsahu zvuku proběhlo veškeré zpracování pomocí svobodných nástrojů jako \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT} a ImageMagick. V článku ukazuji užití těchto nástrojů.
 \end{abstract}
 \klicovaslova: audiovizuální záznam, zpracování videa, titulky, zpracování zvuku, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, waifu2x
 
@@ -92,10 +93,13 @@ V tomto článku popisuji přípravu záznamu od akvizice a zpracování surový
 
 Nejprve v sekci~\ref{sec:akvizice} popisuji akvizici a zpracování surových audiovizuálních dat. Následně v sekci~\vref{sec:uvodni-slovo-a-zaver} popisuji přípravu videozáznamu úvodního slova a závěru představení. Dále v sekci~\vref{sec:panely} popisuji přípravu panelů doprovázejících představení. Nakonec v sekci~\vref{sec:spojeni} popisuji spojení jednotlivých částí do výsledného záznamu. V sekci \vref{sec:zaver} shrnuji poznatky z článku a popisuji promítání hotového videozáznamu na \acro{FI~MU} 18. prosince 2019.
 
+\vspace{-10pt}
 \section{Akvizice a zpracování videa a zvuku}
 \label{sec:akvizice}
-Video a zvuk představení zaznamenali a předzpracovali Petr Šiler, Petr „Tudy“ Holubář a studenti z laboratoře \acro{LEMMA}~\cite{LEMMA}. Následně jsem u videa sjednotil formát dat a do zvuku představení jsem přimíchal zvuky okolí a úvodní slovo Jiřího Zlatušky.
+\vspace{-5pt}
+Video a zvuk představení zaznamenali a předzpracovali Pavel Šiler, Petr „Tudy“ Holubář a studenti laboratoře \acro{LEMMA}~\cite{LEMMA}. Následně jsem u videa sjednotil formát dat a do zvuku jsem přimíchal zvuky okolí a úvodní slovo Jiřího Zlatušky.
 
+\vspace{-10pt}
 \subsection{Záznam videa}
 Video představení zaznamenal Pavel Šiler na kameru Sony~\acro{PXW-X70}. Video zahrnuje přednášky Donalda Knutha na \acro{FI~MU}~\autocites{2019-10-08-video-Knuth-QA1-Sony-Siler}{2019-10-09-video-Knuth-QA2-Sony-Siler}[adresář~\texttt{staticka/}]{2019-10-11-video-Fantasia-apocalyptica-Sony-Siler}, záběry kostela a varhan a úvodní slovo Jiřího Zlatušky.
 
@@ -104,12 +108,13 @@ Video představení zaznamenal Pavel Šiler na kameru Sony~\acro{PXW-X70}. Video
 Ačkoliv jsem video obdržel v rozlišení $1920\times1080$\,px a s frekvencí 25 snímků za vteřinu, od výsledného videozáznamu se očekávalo alespoň dvojnásobné rozlišení \acro{4K} a frekvence 50 snímků za vteřinu.
 Zatímco záznamy přednášek jsem obdržel v prokládaném (tzv. ,,interlaced``) formátu, záběry kostela, varhan a úvodní slovo jsem obdržel v neprokládaném (tzv. ,,progressive``) formátu. Zatímco záznamy přednášek a úvodní slovo byly zabírány ze stativu, záběry kostela a varhan byly pořízeny z ruky. Cílem zpracování videa bylo nejen navýšení rozlišení a snímkové frekvence, ale i sjednocení formátu videa a stabilizace záběrů z ruky.
 
-Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným nástrojem waifu2x~\cite{waifu2x}, vizte obrázky~\ref{fig:ffmpeg-waifu2x}--\ref{fig:minterpolate-yadif}. Nejprve jsem stabilizoval záběry z ruky filtry \texttt{vidstabdetect}~\cite{vidstabdetect} a~\texttt{vidstab\discretionary{\textrm{-}}{}{}transform}~\cite{vidstabtransform} nástroje FFmpeg. Následně jsem navýšil rozlišení a snímkovou frekvenci následně:
+Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným nástrojem waifu2x~\cite{waifu2x}, vizte obrázky~\ref{fig:ffmpeg-waifu2x}--\ref{fig:minterpolate-yadif}. Nejprve jsem stabilizoval záběry z ruky filtry \texttt{vidstabdetect}~\cite{vidstabdetect} a~\texttt{vidstab\discretionary{\textrm{-}}{}{}transform}~\cite{vidstabtransform} nástroje FFmpeg. Následně jsem navýšil rozlišení a snímkovou frekvenci následně:\footnote{Navýšené rozlišení a především snímková frekvence jsou jen iluze. Proto upravené video tvoří jen ca 7 minut ze 104minutového videozáznamu. Zbylých 97 minut tvoří animované panely, které mají nativní rozlišení \acro{4K} a snímkovou frekvenci 50 snímků za vteřinu.}
 \begin{itemize}
 \item U neprokládaných videí jsem nejprve navýšil rozlišení nástrojem waifu2x. Následně jsem navýšil snímkovou frekvenci filtrem \texttt{minterpolate}~\cite{minterpolate} nástroje FFmpeg, který chybějící snímky interpoluje podle okolních snímků.
 \item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpoluje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
 \end{itemize}
 
+% TODO: Use correct frame image on camcorder in Figure 2a.
 \input images/ffmpeg-waifu2x
 
 \subsection{Záznam zvuku}
