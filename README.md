@@ -5,12 +5,12 @@ premiéry multimediálního díla „Fantasia Apocalyptica“*, který se chyst�
 zveřejnit ve Zpravodaji CSTUGu.
 
 Pro sazbu článku potřebujeme unixový systém s nainstalovanými programy
-FFmpeg, GNU Make, ImageMagick a OptiPNG.
+FFmpeg, GNU Make, ImageMagick, OptiPNG a PDFtk.
 
 PDF dokument [`main.pdf`][1] s textem článku vysázíme následujím příkazem:
 
 ``` bash
-latexmk -lualatex -shell-escape main.tex
+make main.pdf
 ```
 
  [1]: https://github.com/Witiko/fantasia-apocalyptica/releases/download/latest/main.pdf
