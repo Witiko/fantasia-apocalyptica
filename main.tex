@@ -83,9 +83,9 @@
 \begin{abstract}
 11. října 2019 se při příležitosti oslav 25. výročí založení Fakulty informatiky Masarykovy univerzity uskutečnila česká premiéra multimediálního díla \emph{Fantasia Apocalyptica} za osobní účasti autora, Donalda Knutha. Z představení byl pořízen videozáznam, který je veřejně dostupný na YouTube kanálu Fakulty informatiky.
 
-V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru, navýšení rozlišení videa a zúžení dynamického rozsahu zvuku proběhlo veškeré zpracování pomocí svobodných nástrojů jako \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT} a ImageMagick. V článku ukazuji užití těchto nástrojů.
+V tomto článku popisuji přípravu záznamu od akvizice a zpracování surových audiovizuálních dat přes přípravu replik panelů doprovázejících představení po spojení jednotlivých částí do výsledného záznamu. S výjimkou střihu úvodního slova a závěru, navýšení rozlišení videa a zúžení dynamického rozsahu zvuku proběhlo zpracování pomocí svobodných nástrojů jako \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT}, \acro{PDF}tk a ImageMagick. V článku ukazuji užití těchto nástrojů.
 \end{abstract}
-\klicovaslova: audiovizuální záznam, zpracování videa, titulky, zpracování zvuku, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, waifu2x
+\klicovaslova: audiovizuální záznam, zpracování videa, titulky, zpracování zvuku, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, \acro{PDF}tk, waifu2x
 
 \bigskip
 
@@ -164,15 +164,21 @@ Představení doprovázela projekce na dvou panelech: První panel zobrazoval te
 
 Ve videozáznamu jsme panely oproti představení obohatili následně:
 \begin{enumerate}
-\item Do panelu s textem jsem přidal český překlad Janovy Apokalypsy v českém ekumenickém překladu se svolením České biblické společnosti.
+\item Do panelu s textem jsem přidal český překlad Janovy Apokalypsy.
 \item Navýšil jsem rozlišení ilustrací od Duane Bibbyho.
 \item Tomáš Szaniszlo přidal třetí panel, který zobrazuje noty pro varhany.
 \end{enumerate}
 
 V této sekci popisuji proces přípravy panelů použitých ve videozáznamu.
 
+\input images/screen2-texts
+
 \subsection{Příprava panelu s trojjazyčným textem Zjevení Janova}
-Pro anglický a řecký text jsme použili dokument~\cite{morland2018fantasia} z kanadské premiéry, který zobrazuje nejprve řecký text na světle žlutém poli a pod ním anglický text na modrém poli, vizte Obrázek TODO.
+Pro řecký a anglický text jsem použil \acro{PDF} dokument~\cite{morland2018fantasia} z kanadské premiéry, který zobrazuje nejprve řecký text na světle žlutém poli a pod ním anglický text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-greek-and-english-original}.
+
+Aby řecký a anglický text tvořily horní dvě barvy české trikolory, nejprve jsem \acro{PDF} dokument dekomprimoval svobodným nástrojem \acro{PDF}tk~\cite{pdftk}. Následně jsem pomocí \acro{POSIX}ového editoru \texttt{sed} upravil barvu textu a pozadí v dekomprimovaném dokumentu tak, aby byl anglický text na červeném poli, vizte Obrázek~\ref{fig:screen2-texts-greek-and-english-updated}.
+
+Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u a svobodného písma Slabo od písmolijny Tiro Typeworks jsem vytvořil samostatný dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
 
 \subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
 TODO
@@ -196,9 +202,9 @@ TODO
 \begin{summary}
 On October 11, 2019, the Czech premiere of \emph{Fantasia Apocalyptica} was held for the 25th anniversary of Masaryk University's Faculty of Informatics, featuring its author, Donald Knuth. A video recording of the perfomance was taken and published at the YouTube channel of the Faculty of Informatics.
 
-In this article, I describe how the recording was prepared from processing the raw footage through replicating the panels that accompanied the performance to the final composition. Apart from super-resolution imaging, the editing of the intro and the wrap-up, and the compression of sound, only free open-source tools like \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT}, and ImageMagick were used. In the article, I describe how readers can use these tools to create their own recordings.
+In this article, I describe how the recording was prepared from processing the raw footage through replicating the panels that accompanied the performance to the final composition. Apart from super-resolution imaging, the editing of the intro and the wrap-up, and the compression of sound, only free open-source tools like \TeX, Audacity, Aegisub, FFmpeg, \acro{MLT}, \acro{PDF}tk, and ImageMagick were used. In the article, I describe how readers can use these tools for their own recordings.
 
-\keywords: footage acquisition, audio-visual production, subtitles, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, waifu2x
+\keywords: footage acquisition, audio-visual production, subtitles, \TeX, Audacity, Aegisub, \acro{ASS}, FFmpeg, ImageMagick, \acro{MLT}, \acro{PDF}tk, waifu2x
 \end{summary}
 
 \end{document}
