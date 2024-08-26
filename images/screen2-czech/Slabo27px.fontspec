@@ -1,0 +1,7 @@
+\defaultfontfeatures[Slabo27px]{
+  Extension = .ttf,
+  UprightFont = *-Regular,
+  BoldFont = *-Regular,
+  BoldFeatures = { FakeBold = 3.0 },
+  AutoFakeSlant,
+}
