@@ -34,7 +34,7 @@ $ sed -i dekomprimovaný-dokument.pdf \
 $ parallel -- convert -density 600 {} -resize '1920x1200!' sRGB {.}.png ::: *.pdf
 $ ROZMAZEJ='-resize 50% -filter Gaussian -define filter:sigma=12 -resize 200%'
 $ convert pozadí.png \( \( zářící-text.png $ROZMAZEJ \) základní-text.png \
->                       -composite \) -composite výstup.png
+>                       -composite \) -composite výsledný-překrytý-text.png
 \end{verbatim}
 \endgroup
 \par\vspace{1.5pt}
