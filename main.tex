@@ -166,7 +166,7 @@ Ve videozáznamu jsme panely oproti představení obohatili následně:
 \begin{enumerate}
 \item Do panelu s textem jsem přidal český překlad Janovy Apokalypsy.
 \item Navýšil jsem rozlišení ilustrací od Duane Bibbyho.
-\item Tomáš Szaniszlo přidal třetí panel, který zobrazuje noty pro varhany.
+\item Tomáš Szaniszlo připravil třetí panel, který zobrazuje noty pro varhany.
 \end{enumerate}
 
 V této sekci popisuji proces přípravy panelů použitých ve videozáznamu.
@@ -181,10 +181,23 @@ Aby řecký a anglický text tvořily horní dvě barvy české trikolory, nejpr
 Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u, písma Slabo od písmolijny Tiro Typeworks a nástroje ImageMagick jsem vytvořil dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
 
 \subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
-TODO
+Ilustrace Duane Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdfimages. Následně jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
+\begingroup
+\small
+\begin{verbatim}
+$ pdfimages -png fant-screen1-art.pdf ilustrace/ilustrace
+$ find ilustrace/ -name '*.png' | sort > ilustrace.txt
+$ th waifu2x.lua -l ilustrace.txt -model_dir models/anime_style_art_rgb \
+>                -noise_level 3 -tta 1 -o zvětšené-ilustrace/%06d.png
+\end{verbatim}
+\endgroup
 
 \subsection{Příprava panelu s notami pro varhany}
-TODO
+Pro každou z 22 kapitol si Tomáš Szaniszlo na počítači otevřel digitalizované noty pro varhany~\cite[sekce~„Music scores to download“]{knuth2023fantasia} v prohlížeči \acro{PDF} dokumentů a začal zaznamenávat obrazovku počítače. Následně si Tomáš pustil zvuk představení a pomocí počítačové myši posouval noty tak, aby zobrazená část odpovídala zvuku. Výsledkem bylo 22 videozáznamů not pro varhany, vizte Obrázek~\ref{fig:screen3}.
+\begin{sideways-figure}{fig:screen3}
+\includegraphics[width=\linewidth]{screen3}
+\caption{Videozáznam not pro varhany od Tomáše Szaniszlo.}
+\end{sideways-figure}
 
 \section{Spojení jednotlivých částí do výsledného videa}
 \label{sec:spojeni}

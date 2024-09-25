@@ -12,8 +12,8 @@
 \begin{verbatim}
 $ ffmpeg -i vstupní-video.mp4 -f image2 obrázky-snímků/%06d.png
 $ find obrázky-snímků/ -name '*.png' | sort > obrázky-snímků.txt
-$ th waifu2x.lua -l obrázky-snímků.txt -model_dir models/photo \
->                -tta 1 -tta_level 8 -o zvětšené-obrázky/%06d.png
+$ th waifu2x.lua -l obrázky-snímků.txt -model_dir models/photo -tta 1 \
+>                -o zvětšené-obrázky/%06d.png
 $ ffmpeg -framerate 25 zvětšené-obrázky/%06d.png výstupní-video.mp4
 \end{verbatim}
 \endgroup
