@@ -168,6 +168,7 @@ Ve videozáznamu jsme panely oproti představení obohatili následně:
 \begin{enumerate}
 \item Do panelu s textem jsem přidal český překlad Janovy Apokalypsy.
 \item Navýšil jsem rozlišení ilustrací od Duane Bibbyho.
+\item Změny textu a ilustrací na prvních dvou panelech jsem ozvláštnil animací.
 \item Tomáš Szaniszlo připravil třetí panel, který zobrazuje noty pro varhany.
 \end{enumerate}
 
@@ -194,12 +195,47 @@ $ th waifu2x.lua -l ilustrace.txt -model_dir models/anime_style_art_rgb \
 \end{verbatim}
 \endgroup
 
+\subsection{Animace panelů s textem a ilustracemi}
+TODO
+\begin{sideways-figure}{fig:flowblade}
+\includegraphics[width=\linewidth]{flowblade}
+\caption{Synchronizace panelů s textem a ilustracemi se zvukem představení ve svobodném programu Flowblade.}
+\end{sideways-figure}
+
 \subsection{Příprava panelu s notami pro varhany}
-Pro každou z 22 kapitol si Tomáš Szaniszlo na počítači otevřel digitalizované noty pro varhany~\cite[sekce~„Music scores to download“]{knuth2023fantasia} v prohlížeči \acro{PDF} dokumentů a začal zaznamenávat obrazovku počítače. Následně si Tomáš pustil zvuk představení a pomocí počítačové myši posouval noty tak, aby zobrazená část odpovídala zvuku. Výsledkem bylo 22 videozáznamů not pro varhany, vizte Obrázek~\ref{fig:screen3}.
+Pro každou z 22 kapitol si Tomáš Szaniszlo na počítači otevřel digitalizované noty pro varhany~\cite[sekce~„Music scores to download“]{knuth2023fantasia} v prohlížeči \acro{PDF} dokumentů a začal zaznamenávat obrazovku počítače. Následně si Tomáš pustil zvuk představení a pomocí počítačové myši posouval noty tak, aby zobrazená část odpovídala zvuku. Výsledkem bylo 22 videí not pro varhany, vizte Obrázek~\ref{fig:screen3}.
 \begin{sideways-figure}{fig:screen3}
 \includegraphics[width=\linewidth]{screen3}
 \caption{Videozáznam not pro varhany od Tomáše Szaniszlo.}
 \end{sideways-figure}
+
+Tato videa jsem nástrojem FFmpeg seříznul z 1920\,px na 1344\,px, aby zmizely postranní šedivé okraje:
+\begin{verbatim}
+$ ffmpeg -i vstupní-video.mp4                                    \
+>        -vf 'crop=1344:1076:280:4,
+>             pad=w=1920:h=1076:x=ow-iw/2:y=oh-ih/2:color=white' \
+>          výstupní-video.mp4
+\end{verbatim}
+
+Dále jsem do horní části videí doplnil bílý obdélník o výšce 62\,px, který na začátku videa překrývá horní šedivý okraj a následně se změní na poloprůhledný obdélník, který přechází od plné neprůhlednosti ve své horní části po plnou průhlednost ve své spodní části a tvoří tak měkký předěl mezi notami a ilustracemi:
+\begin{verbatim}
+$ ffmpeg -i vstupní-video.mp4 \
+>        -vf "drawbox=0:0:1920:62:white:fill:enable='lte(n,$N)',
+>             drawbox=0:0:1920:1:white@1.0000:enable='gt(n,$N)',
+>             drawbox=0:1:1920:1:white@0.9838:enable='gt(n,$N)',
+>             drawbox=0:2:1920:1:white@0.9677:enable='gt(n,$N)',
+>             ...
+>             drawbox=0:61:1920:1:white@0.016:enable='gt(n,$N)'" \
+>          výstupní-video.mp4
+\end{verbatim}
+Proměnná \verb|$N| zde značí snímek, po kterém se obdélník změní na poloprůhledný, a liší se pro jednotlivá videa not. Např. ve videu pro 21. kapitolu jsem nastavil \verb|N=2700|. Při frekvenci 50 snímků za vteřinu tedy dojde ke změně po 54 vteřinách, kdy již Tomáš posunul noty tak, že horní šedivý okraj není vidět.
+
+Následně jsem videa sestříhal a synchonizoval se zvukem představení v programu Flowblade podobně jako v předchozí sekci. Výsledné video jsem vykreslil nástrojem Melt ze svobodné softwarové knihovny \acro{MLT}:
+\begin{verbatim}
+$ melt vstupní-projekt.xml -consumer avformat:výstupní-video.mp4
+\end{verbatim}
+
+Pro srovnání surových videí not s výsledným videem vizte obrázky~\ref{fig:screen3} a \ref{fig:montage}.
 
 \section{Spojení jednotlivých částí do výsledného videa}
 \label{sec:spojeni}
@@ -207,7 +243,8 @@ TODO
 \begin{sideways-figure}{fig:montage-diagram}
 \centering
 \input images/montage-diagram
-\caption{Diagram pro spojení jednotlivých částí do výsledného videa.}
+\caption{Diagram pro spojení jednotlivých panelů do výsledného videa.}
+\ClassWarning{csbulletin}{Make sure that the captions on the left and right sides of the diagram are facing down in the final article.}
 \end{sideways-figure}
 \begin{sideways-figure}{fig:montage}
 \includegraphics[width=\linewidth]{montage}

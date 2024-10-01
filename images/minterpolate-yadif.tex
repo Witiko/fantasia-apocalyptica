@@ -20,7 +20,7 @@
 \begin{verbatim}
 $ ffmpeg -i vstupní-video.mp4 \
 >        -vf minterpolate     \
->        výstupní-video.mp4
+>          výstupní-video.mp4
 \end{verbatim}
 \input images/frames/output-minterpolate-frames
 \caption{Filtr \texttt{minterpolate} dokáže u neprokládaných videí odhadnout obraz v mezilehlých okamžicích podle okolních snímků.\footnotemark}
@@ -29,7 +29,7 @@ $ ffmpeg -i vstupní-video.mp4 \
 \begin{verbatim}
 $ ffmpeg -i vstupní-video.mp4 \
 >        -vf yadif=send_field \
->        výstupní-video.mp4
+>          výstupní-video.mp4
 \end{verbatim}
 \input images/frames/output-yadif-frames
 \caption{Filtr \texttt{yadif} dokáže u prokládaných videí zdvojnásobit rozlišení půlsnímků podle daného půlsnímku a jeho sousedů.}
