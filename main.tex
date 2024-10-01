@@ -39,6 +39,7 @@
 \graphicspath{{./images/}}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
 
 \usepackage[
   implicit=false,
@@ -182,7 +183,7 @@ Aby řecký a anglický text tvořily horní dvě barvy české trikolory, nejpr
 Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u, písma Slabo od písmolijny Tiro Typeworks a nástroje ImageMagick jsem vytvořil dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
 
 \subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
-Ilustrace Duane Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdfimages. Následně jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
+Ilustrace Duanea Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdfimages. Následně jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
 \begingroup
 \small
 \begin{verbatim}
@@ -203,6 +204,16 @@ Pro každou z 22 kapitol si Tomáš Szaniszlo na počítači otevřel digitalizo
 \section{Spojení jednotlivých částí do výsledného videa}
 \label{sec:spojeni}
 TODO
+\begin{sideways-figure}{fig:montage-diagram}
+\centering
+\input images/montage-diagram
+\caption{Diagram pro spojení jednotlivých částí do výsledného videa.}
+\end{sideways-figure}
+\begin{sideways-figure}{fig:montage}
+\includegraphics[width=\linewidth]{montage}
+\par\vspace{-1.175cm}
+\caption{Výsledné video.\kern 8.5cm\relax}
+\end{sideways-figure}
 
 \section{Závěr}
 \label{sec:zaver}

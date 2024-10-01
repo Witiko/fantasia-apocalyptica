@@ -1,0 +1,47 @@
+\begin{tikzpicture}[x=0.385cm, y=0.385cm]
+
+% Rectangle
+\draw[thick] (0,0) rectangle (38.40, 21.60);
+
+% Vertical divisions
+\draw (19.20, 0) -- (19.20, 21.60);
+
+% Horizontal divisions
+\draw (0, 9.60) -- (19.20, 9.60);
+\draw (19.20, 10.76) -- (38.40, 10.76);
+
+% Diagonals
+\draw (0, 0) -- (19.20, 9.60); \draw (19.20, 0) -- (0, 9.60);
+\draw (0, 9.60) -- (19.20, 21.60); \draw (19.20, 9.60) -- (0, 21.60);
+\draw (19.20, 0) -- (38.40, 10.76); \draw (38.40, 0) -- (19.20, 10.76);
+\draw (19.20, 10.76) -- (38.40, 21.60); \draw (38.40, 10.76) -- (19.20, 21.60);
+
+% Text labels
+\node [anchor=north] at (9.60, 20.30) { \smash{Ř}ecký a anglický text };
+\node [anchor=north] at (9.60, 7.58) { \smash{Č}eský text };
+\node [anchor=north] at (28.80, 9.16) { Noty pro varhany };
+\node [anchor=north] at (28.80, 21.13) { Ilustrace Duanea Bibbyho };
+
+% Braces for individual vertical sections (left)
+\draw[decorate,decoration={brace,amplitude=5pt},xshift=-5pt] (0, 0) -- (0, 9.50) node[midway,xshift=-15pt,rotate=90] {960\,px};
+\draw[decorate,decoration={brace,amplitude=5pt},xshift=-5pt] (0, 9.70) -- (0, 21.60) node[midway,xshift=-15pt,rotate=90] {1200\,px};
+
+% Braces for individual vertical sections (right)
+\draw[decorate,decoration={brace,amplitude=5pt,mirror},xshift=+5pt] (38.40, 0) -- (38.40, 10.66) node[midway,xshift=+15pt,rotate=90] {1076\,px};
+\draw[decorate,decoration={brace,amplitude=5pt,mirror},xshift=+5pt] (38.40, 10.86) -- (38.40, 21.60) node[midway,xshift=+15pt,rotate=90] {1084\,px};
+
+% Brace for combined vertical length
+\draw[decorate,decoration={brace,amplitude=25pt},xshift=-20pt] (0, 0) -- (0, 21.60) node[midway,xshift=-35pt,rotate=90] {2160\,px};
+
+% Braces for individual horizontal sections (top)
+\draw[decorate,decoration={brace,amplitude=5pt},yshift=+5pt] (0, 21.60) -- (19.10, 21.60) node[midway,yshift=+15pt] {1920\,px};
+\draw[decorate,decoration={brace,amplitude=5pt},yshift=+5pt] (19.30, 21.60) -- (38.40, 21.60) node[midway,yshift=+15pt] {1920\,px};
+
+% Braces for individual horizontal sections (bottom)
+% \draw[decorate,decoration={brace,amplitude=5pt,mirror},yshift=-5pt] (0, 0) -- (19.10, 0) node[midway,yshift=-15pt] {1920\,px};
+% \draw[decorate,decoration={brace,amplitude=5pt,mirror},yshift=-5pt] (19.30, 0) -- (38.40, 0) node[midway,yshift=-15pt] {1920\,px};
+
+% Brace for combined horizontal length
+\draw[decorate,decoration={brace,amplitude=25pt},yshift=20pt] (0, 21.60) -- (38.40, 21.60) node[midway,yshift=35pt] {3840\,px};
+
+\end{tikzpicture}%
