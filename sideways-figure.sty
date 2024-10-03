@@ -5,7 +5,7 @@
 \newcommand{\rotateFigurePageForLabel}[1]{%
   \zlabel{#1}%
   \AtBeginShipout{%
-  \ifnum\c@page=\zref@extractdefault{#1}{abspage}{0}
+  \ifnum\c@page=\zref@extractdefault{#1}{abspage}{0}%
     \ifodd\c@page
       \pdfpageattr{/Rotate 90}%
     \else

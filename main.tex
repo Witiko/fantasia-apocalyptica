@@ -13,6 +13,7 @@
 \usemintedstyle{bw}
 % \setminted{firstnumber=last, linenos}
 \newenvironment{mintedblock}{%
+  \let\textit\textsl
   \par\vspace{\topsep}\vspace{\partopsep}%
   \begingroup
   \fvset{listparameters=\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}}%
@@ -150,7 +151,7 @@ $ ffmpeg -i vstupní-video.mp4 -vf ass=vstupní-titulky.ass video-s-titulky.mp4
 \end{filecontents}
 Úvodní slovo Jiřího Zlatušky jsem opatřil titulky ve formátu \acro{ASS}\footnote{Pro vypálení titulků do obrazu videa slouží filtr \texttt{ass} nástroje FFmpeg:
 \begin{mintedblock}
-\inputminted{bash}{example-ass.sh}
+\inputminted{text}{example-ass.sh}
 \end{mintedblock}
 \noindent
 Filtr \texttt{ass}~\cite{ass} implementuje softwarová knihovna \texttt{libass}~\cite{libass}, která ve výchozím nastavení nepoužívá kerningovou tabulku použitého písma~\cite{enable-kerning-by-default}. Pro použití kerningové tabulky je třeba do sekce \texttt{[Script Info]} souboru \texttt{vstupní-titulky.ass} přidat řádek \texttt{Kerning: yes}.}~\cite{2019-12-12-titulky-Novotny}, které jsem připravil ve svobodném nástroji Aegisub~\cite{aegisub}, vizte Obrázek~\ref{fig:aegisub}.
@@ -181,7 +182,7 @@ Pro řecký a anglický text jsem použil \acro{PDF} dokument~\cite{morland2018f
 
 Aby řecký a anglický text tvořily horní dvě barvy české trikolory, nejprve jsem \acro{PDF} dokument dekomprimoval svobodným nástrojem \acro{PDF}tk~\cite{pdftk}. Následně jsem pomocí \acro{POSIX}ového editoru \texttt{sed} upravil barvu textu a pozadí v dekomprimovaném dokumentu tak, aby byl anglický text na červeném poli, vizte Obrázek~\ref{fig:screen2-texts-greek-and-english-updated}.
 
-Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u, písma Slabo od písmolijny Tiro Typeworks a nástroje ImageMagick jsem vytvořil dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
+Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u, písma Slabo od písmolijny Tiro Typeworks a nástroje ImageMagick~\cite{imagemagick} jsem vytvořil dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
 
 \subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
 Ilustrace Duanea Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdfimages. Následně jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
@@ -196,11 +197,87 @@ $ th waifu2x.lua -l ilustrace.txt -model_dir models/anime_style_art_rgb \
 \endgroup
 
 \subsection{Animace panelů s textem a ilustracemi}
-TODO
+Nejprve jsem pro všechny následující páry obrázků z panelů s textem a ilustracemi vygeneroval nástrojem FFmpeg videa s animacemi přechodu:
+\begingroup
+\small
+\begin{verbatim}
+$ ffmpeg -loop 1 -framerate 50 -i první-vstupní-obrázek.png             \
+>        -loop 1 -framerate 50 -i druhý-vstupní-obrázek.png             \
+>        -filter_complex "
+>          [0:v]trim=start=0:end=$D,setpts=PTS-STARTPTS[prvni];
+>          [1:v]trim=start=0:end=$D,setpts=PTS-STARTPTS[druhy];
+>          [prvni]format=yuva420p,fade=out:st=0:d=$D:alpha=1[stmivacka];
+>          [druhy]format=yuva420p,fade=in:st=0:d=$D:alpha=1[roztmivacka];
+>          [stmivacka][roztmivacka]overlay[prechod]
+>        " -map '[prechod]' -r 50 výstupní-video.mp4
+\end{verbatim}
+\endgroup
+Proměnná \verb|$D| zde značí délku animace v sekundách. Použil jsem hodnoty \verb|D=0.52| pro krátké přechody o délce 520 milisekund a \verb|D=1| pro dlouhé přechody o délce jedné vteřiny. Při frekvenci 50 snímků za vteřinu trvají krátké přechody 26 snímků videa a dlouhé přechody 50 snímků videa.
+
+Následně jsem obrázky z panelů s textem a ilustracemi synchonizoval se zvukem představení ve svobodném programu Flowblade~\cite{flowblade} pro digitální střih videa, vizte Obrázek~\ref{fig:flowblade}.%
 \begin{sideways-figure}{fig:flowblade}
 \includegraphics[width=\linewidth]{flowblade}
 \caption{Synchronizace panelů s textem a ilustracemi se zvukem představení ve svobodném programu Flowblade.}
 \end{sideways-figure}
+Projekt Flowblade jsem exportoval do souboru \acro{XML} ve formátu používaného svobodnou softwarovou knihovnou \acro{MLT}~\cite{mlt} pro střih videa. Z tohoto souboru jsem pomocí následujícího programu v jazyce Python~3 extrahoval soubory se seznamem obrázků a dobou jejich trvání vyčíslenou v snímcích videa:
+
+\begin{mintedblock}
+\small
+\begin{minted}{python}
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+obrazky = {}
+strom = ET.parse('vstupní-projekt.xml')
+for producer in strom.findall('.//producer'):
+    obrazek = Path(producer.find('property[@name="resource"]').text)
+    producer_id = producer.attrib['id']
+    entry = strom.find(f'.//playlist/entry[@producer="{producer_id}"]')
+    trvani = int(entry.attrib['out']) - int(entry.attrib['in']) + 1
+    obrazky[obrazek] = trvani
+
+with open('časování-ilustrací.txt', 'wt') as f1, \
+        open('časování-řeckého-a-anglického-textu.txt', 'wt') as f2, \
+        open('časování-českého-textu.txt', 'wt') as f3:
+    for obrazek, trvani in sorted(obrazky.items()):
+        if f'{obrazek.parent.name}/' == 'ilustrace/':
+            print(f'{obrazek.name}\t{trvani}', file=f1)
+        elif f'{obrazek.parent.name}/' == 'řecký-a-anglický-text/':
+            print(f'{obrazek.name}\t{trvani}', file=f2)
+            print(f'{obrazek.name}\t{trvani}', file=f3)
+\end{minted}
+\end{mintedblock}
+
+Na ukázku uvádím první dva řádky výstupních souborů:
+
+\begingroup
+\small
+\begin{verbatim}
+$ paste časování-ilustrací.txt časování-řeckého-a-anglického-textu.txt \
+> časování-českého-textu.txt | head -3
+004.png  17866       001.png  15270       001.png  15270
+005.png  3066        002.png  378         002.png  378
+\end{verbatim}
+\endgroup
+\noindent
+Např. obrázek \verb|ilustrace/004.png| trvá 17886 snímků videa, tj. přibližně 6 minut.
+
+Pro každý obrázek jsem vybral animaci podle jeho doby trvání:
+\begin{itemize}
+\item Po obrázcích kratších než 2 vteřiny následuje okamžitě další obrázek.
+\item Po obrázcích dlouhých 2–5 vteřin následuje krátká animace přechodu.
+\item Po obrázcích delších než 5 vteřin následuje dlouhá animace přechodu.
+\end{itemize}
+Např. po obrázku \verb|ilustrace/004.png| následuje dlouhá animace přechodu.
+
+Dále jsem pro každý obrázek nástrojem FFmpeg vygeneroval video, jehož délka odpovídala době trvání obrázku po odečtení doby trvání animace. Např. video pro obrázek \verb|ilustrace/004.png| trvá 17 886 snímků videa po odečtení jedné vteřiny pro animaci:
+\begin{verbatim}
+$ ffmpeg -loop 1 -framerate 50 -i ilustrace/004.png              \
+>        -t $(bc -l <<< '17866 / 50 - 1')                        \
+>        -r 50 výstupní-video.mp4
+\end{verbatim}
+
+Nakonec jsem videa obrázků a videa animací spojil nástrojem FFmpeg do tří animovaných videí s řeckým a anglickým textem, českým textem a ilustracemi~\cite{ffmpeg-concat}.
 
 \subsection{Příprava panelu s notami pro varhany}
 Pro každou z 22 kapitol si Tomáš Szaniszlo na počítači otevřel digitalizované noty pro varhany~\cite[sekce~„Music scores to download“]{knuth2023fantasia} v prohlížeči \acro{PDF} dokumentů a začal zaznamenávat obrazovku počítače. Následně si Tomáš pustil zvuk představení a pomocí počítačové myši posouval noty tak, aby zobrazená část odpovídala zvuku. Výsledkem bylo 22 videí not pro varhany, vizte Obrázek~\ref{fig:screen3}.
@@ -230,7 +307,7 @@ $ ffmpeg -i vstupní-video.mp4 \
 \end{verbatim}
 Proměnná \verb|$N| zde značí snímek, po kterém se obdélník změní na poloprůhledný, a liší se pro jednotlivá videa not. Např. ve videu pro 21. kapitolu jsem nastavil \verb|N=2700|. Při frekvenci 50 snímků za vteřinu tedy dojde ke změně po 54 vteřinách, kdy již Tomáš posunul noty tak, že horní šedivý okraj není vidět.
 
-Následně jsem videa sestříhal a synchonizoval se zvukem představení v programu Flowblade podobně jako v předchozí sekci. Výsledné video jsem vykreslil nástrojem Melt ze svobodné softwarové knihovny \acro{MLT}:
+Následně jsem videa sestříhal a synchonizoval se zvukem představení v programu Flowblade podobně jako v předchozí sekci. Výsledné video jsem vykreslil nástrojem Melt z knihovny \acro{MLT}:
 \begin{verbatim}
 $ melt vstupní-projekt.xml -consumer avformat:výstupní-video.mp4
 \end{verbatim}
