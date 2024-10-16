@@ -1,3 +1,6 @@
+% Při kompilaci dokumentu LuaLaTeXem dojde k chybě, protože
+% nedefinuje \pdfpagewidth a \pdfpageheight. 
+% Balíček luatex85 to napravuje.
 \RequirePackage{luatex85}
 \PassOptionsToPackage{shorthands=off}{babel}
 \makeatletter
@@ -117,7 +120,6 @@ Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným n�
 \item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpoluje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
 \end{itemize}
 
-% TODO: Use correct frame image on camcorder in Figure 2a.
 \input images/ffmpeg-waifu2x
 
 \subsection{Záznam zvuku}
@@ -197,22 +199,9 @@ $ th waifu2x.lua -l ilustrace.txt -model_dir models/anime_style_art_rgb \
 \endgroup
 
 \subsection{Animace panelů s textem a ilustracemi}
-Nejprve jsem pro všechny následující páry obrázků z panelů s textem a ilustracemi vygeneroval nástrojem FFmpeg videa s animacemi přechodu:
-\begingroup
-\small
-\begin{verbatim}
-$ ffmpeg -loop 1 -framerate 50 -i první-vstupní-obrázek.png             \
->        -loop 1 -framerate 50 -i druhý-vstupní-obrázek.png             \
->        -filter_complex "
->          [0:v]trim=start=0:end=$D,setpts=PTS-STARTPTS[prvni];
->          [1:v]trim=start=0:end=$D,setpts=PTS-STARTPTS[druhy];
->          [prvni]format=yuva420p,fade=out:st=0:d=$D:alpha=1[stmivacka];
->          [druhy]format=yuva420p,fade=in:st=0:d=$D:alpha=1[roztmivacka];
->          [stmivacka][roztmivacka]overlay[prechod]
->        " -map '[prechod]' -r 50 výstupní-video.mp4
-\end{verbatim}
-\endgroup
-Proměnná \verb|$D| zde značí délku animace v sekundách. Použil jsem hodnoty \verb|D=0.52| pro krátké přechody o délce 520 milisekund a \verb|D=1| pro dlouhé přechody o délce jedné vteřiny. Při frekvenci 50 snímků za vteřinu trvají krátké přechody 26 snímků videa a dlouhé přechody 50 snímků videa.
+Nejprve jsem pro všechny následující páry obrázků z panelů s textem a ilustracemi vygeneroval nástrojem FFmpeg videa s animacemi přechodu, vizte Obrázek~\ref{fig:transition}.
+
+\input images/transition/figure
 
 Následně jsem obrázky z panelů s textem a ilustracemi synchonizoval se zvukem představení ve svobodném programu Flowblade~\cite{flowblade} pro digitální střih videa, vizte Obrázek~\ref{fig:flowblade}.%
 \begin{sideways-figure}{fig:flowblade}
@@ -223,6 +212,7 @@ Projekt Flowblade jsem exportoval do souboru \acro{XML} ve formátu používané
 
 \begin{mintedblock}
 \small
+% TODO: Přesuň do plovoucí ukázky kódu
 \begin{minted}{python}
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -251,6 +241,8 @@ with open('časování-ilustrací.txt', 'wt') as f1, \
 Na ukázku uvádím první dva řádky výstupních souborů:
 
 \begingroup
+% TODO: Odstraň a místo toho vypiš přímo v textu hodnotu pro obrázek u verše 21:08.
+% TODO: Všechny následující příklady v této sekci ilustruj na tomto obrázku místo obrázku `ilustrace/004.png`.
 \small
 \begin{verbatim}
 $ paste časování-ilustrací.txt časování-řeckého-a-anglického-textu.txt \
@@ -331,7 +323,7 @@ TODO
 
 \section{Závěr}
 \label{sec:zaver}
-TODO
+% TODO: Popsat promítání videozáznamu 18. prosince 2019 včetně popisu plakátu a nahánění studentů z haly za zvuku PC speakerů. https://gitlab.fi.muni.cz/unix/beeplay/-/commits/master/?ref_type=HEADS
 
 \begingroup
 \sloppy

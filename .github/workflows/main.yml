@@ -22,7 +22,7 @@ jobs:
         run: |
           set -e
           apt-get -qy update
-          apt-get -qy install --no-install-recommends ffmpeg make imagemagick optipng pdftk
+          apt-get -qy install --no-install-recommends ffmpeg make imagemagick jpegoptim optipng pdftk
       - name: Typeset paper
         run: make main.pdf
       - name: Upload artifacts
