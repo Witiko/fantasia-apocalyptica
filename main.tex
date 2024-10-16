@@ -287,17 +287,19 @@ $ ffmpeg -i vstupní-video.mp4                                    \
 \end{verbatim}
 
 Dále jsem do horní části videí doplnil bílý obdélník o výšce 62\,px, který na začátku videa překrývá horní šedivý okraj a následně se změní na poloprůhledný obdélník, který přechází od plné neprůhlednosti ve své horní části po plnou průhlednost ve své spodní části a tvoří tak měkký předěl mezi notami a ilustracemi:
-\begin{verbatim}
+\begin{mintedblock}
+\begin{Verbatim}[commandchars=|\{\}]
 $ ffmpeg -i vstupní-video.mp4 \
->        -vf "drawbox=0:0:1920:62:white:fill:enable='lte(n,$N)',
+>        -vf "drawbox=0:0:1920:62:white:fill:enable='lte(n,$N|footnotemark{})',
 >             drawbox=0:0:1920:1:white@1.0000:enable='gt(n,$N)',
 >             drawbox=0:1:1920:1:white@0.9838:enable='gt(n,$N)',
 >             drawbox=0:2:1920:1:white@0.9677:enable='gt(n,$N)',
 >             ...
 >             drawbox=0:61:1920:1:white@0.016:enable='gt(n,$N)'" \
 >          výstupní-video.mp4
-\end{verbatim}
-Proměnná \verb|$N| zde značí snímek, po kterém se obdélník změní na poloprůhledný, a liší se pro jednotlivá videa not. Např. ve videu pro 21. kapitolu jsem nastavil \verb|N=2700|. Při frekvenci 50 snímků za vteřinu tedy dojde ke změně po 54 vteřinách, kdy již Tomáš posunul noty tak, že horní šedivý okraj není vidět.
+\end{Verbatim}
+\footnotetext{Proměnná \texttt{\$N} značí snímek, po kterém se obdélník změní na poloprůhledný, a liší se pro jednotlivá videa not. Např. ve videu pro 21. kapitolu jsem nastavil \texttt{N=2700}. Při frekvenci 50 snímků za vteřinu tedy dojde ke změně po 54 vteřinách, kdy již Tomáš posunul noty tak, že horní šedivý okraj není vidět.}
+\end{mintedblock}
 
 Následně jsem videa sestříhal a synchonizoval se zvukem představení v programu Flowblade podobně jako v předchozí sekci. Výsledné video jsem vykreslil nástrojem Melt z knihovny \acro{MLT}:
 \begin{verbatim}
