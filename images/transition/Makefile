@@ -18,7 +18,10 @@ $(TRANSITIONS): 194-small.jpg 195-small.jpg
 					 [druhy]format=yuva420p,fade=in:st=0:d=$D:alpha=1[roztmivacka];
 					 [stmivacka][roztmivacka]overlay[prechod]
 				 ' -map '[prechod]' -r 1 transition-%02d.png
-	parallel -- convert {} -quality 100% {.}.jpg ::: transition-0*.png
+	for FILE in transition-0*.png
+	do
+	  convert $$FILE -quality 100% $${FILE%.png}.jpg
+	done
 	jpegoptim -m 85 transition-0*.jpg
 	cp $(word 2,$^) transition-$$(printf '%02d' $$(($D + 1))).jpg
 	rm transition-0*.png
