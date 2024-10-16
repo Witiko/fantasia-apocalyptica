@@ -238,35 +238,21 @@ with open('časování-ilustrací.txt', 'wt') as f1, \
 \end{minted}
 \end{mintedblock}
 
-Na ukázku uvádím první dva řádky výstupních souborů:
-
-\begingroup
-% TODO: Odstraň a místo toho vypiš přímo v textu hodnotu pro obrázek u verše 21:08.
-% TODO: Všechny následující příklady v této sekci ilustruj na tomto obrázku místo obrázku `ilustrace/004.png`.
-\small
-\begin{verbatim}
-$ paste časování-ilustrací.txt časování-řeckého-a-anglického-textu.txt \
-> časování-českého-textu.txt | head -3
-004.png  17866       001.png  15270       001.png  15270
-005.png  3066        002.png  378         002.png  378
-\end{verbatim}
-\endgroup
-\noindent
-Např. obrázek \verb|ilustrace/004.png| trvá 17886 snímků videa, tj. přibližně 6 minut.
+Jeden řádek výstupního souboru \texttt{časování-ilustrací.txt} je např. \texttt{194.png 1119}. To znamená, že obrázek \texttt{ilustrace/194.png} s ilustrací verše 21:08 trvá 1\,119 snímků videa, což je při frekvenci 50 snímků za vteřinu přibližně 22 vteřin.
 
 Pro každý obrázek jsem vybral animaci podle jeho doby trvání:
 \begin{itemize}
 \item Po obrázcích kratších než 2 vteřiny následuje okamžitě další obrázek.
-\item Po obrázcích dlouhých 2–5 vteřin následuje krátká animace přechodu.
-\item Po obrázcích delších než 5 vteřin následuje dlouhá animace přechodu.
+\item \textls[-10]{Po obrázcích dlouhých 2–5 vteřin následuje krátká animace přechodu (520\,ms).}
+\item Po obrázcích delších než 5 vteřin následuje dlouhá animace přechodu (1\,s).
 \end{itemize}
-Např. po obrázku \verb|ilustrace/004.png| následuje dlouhá animace přechodu.
+Např. po obrázku \verb|ilustrace/194.png| následuje dlouhá animace přechodu.
 
-Dále jsem pro každý obrázek nástrojem FFmpeg vygeneroval video, jehož délka odpovídala době trvání obrázku po odečtení doby trvání animace. Např. video pro obrázek \verb|ilustrace/004.png| trvá 17 886 snímků videa po odečtení jedné vteřiny pro animaci:
+Dále jsem pro každý obrázek nástrojem FFmpeg vygeneroval video, jehož délka odpovídala době trvání obrázku po odečtení doby trvání animace. Např. video pro obrázek \verb|ilustrace/194.png| trvá 1\,119 snímků videa po odečtení jedné vteřiny pro dlouhou animaci přechodu:
 \begin{verbatim}
-$ ffmpeg -loop 1 -framerate 50 -i ilustrace/004.png              \
->        -t $(bc -l <<< '17866 / 50 - 1')                        \
->        -r 50 výstupní-video.mp4
+$ ffmpeg -loop 1 -framerate 50 -i ilustrace/194.png              \
+>        -t $(bc -l <<< '1119 / 50 - 1')                         \
+>        -r 50 výstupní-video-pro-verš-21-08.mp4
 \end{verbatim}
 
 Nakonec jsem videa obrázků a videa animací spojil nástrojem FFmpeg do tří animovaných videí s řeckým a anglickým textem, českým textem a ilustracemi~\cite{ffmpeg-concat}.
@@ -325,7 +311,7 @@ TODO
 
 \section{Závěr}
 \label{sec:zaver}
-% TODO: Popsat promítání videozáznamu 18. prosince 2019 včetně popisu plakátu a nahánění studentů z haly za zvuku PC speakerů. https://gitlab.fi.muni.cz/unix/beeplay/-/commits/master/?ref_type=HEADS
+TODO: Popsat promítání videozáznamu 18. prosince 2019 včetně popisu plakátu a nahánění studentů z haly za zvuku PC speakerů. \url{https://gitlab.fi.muni.cz/unix/beeplay/-/commits/master/?ref_type=HEADS}
 
 \begingroup
 \sloppy
