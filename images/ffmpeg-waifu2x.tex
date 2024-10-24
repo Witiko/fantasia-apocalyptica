@@ -1,4 +1,4 @@
-\begin{figure}[b!]
+\begin{figure}[t!]
 \vspace{-10pt}
 \input images/ffmpeg-waifu2x-activity-diagram
 \caption{Diagram aktivit zpracování videa pomocí nástrojů FFmpeg a waifu2x.}
@@ -22,12 +22,24 @@
 \caption{Navýšení snímkové frekvence videa pomocí filtrů nástroje FFmpeg.}
 \label{fig:minterpolate-yadif}
 \end{figure}%
+\begin{filecontents}[overwrite,nosearch,noheader]{output-parameters.sh}
+-c:v libx265 -crf 17 -preset placebo -pix_fmt yuv420p -c:a aac -b:a 384k -ar 44.1k
+\end{filecontents}
+\addtocounter{footnote}{-1}
+\ClassWarning{csbulletin}{Make sure that the footnote text is on the left-hand page and the footnote mark is on the right-hand page, i.e. they are both visible at the same time}
+\footnotetext{Všechny příkazy nástroje FFmpeg používají navíc následující výstupní parametry:
+\begin{mintedblock}
+\inputminted{bash}{output-parameters.sh}
+\end{mintedblock}
+\noindent
+Tyto parametry zajišťují vizuálně a auditivně bezztrátovou kompresi videa a zvuku.}
 \begin{filecontents}[overwrite,nosearch,noheader]{example-minterpolate-frames-01.sh}
 $ ffmpeg -i vstupní-video.mp4 -vf minterpolate obrázky-snímků/%06d.png
 \end{filecontents}
 \begin{filecontents}[overwrite,nosearch,noheader]{example-minterpolate-frames-02.sh}
 $ ffmpeg -framerate 50 obrázky-snímků/%06d.png výstupní-video.mp4
 \end{filecontents}
+\addtocounter{footnote}{1}
 \footnotetext{Při rychlém pohybu kamery nebo zabíraného objektu mohou při použití filtru \texttt{minterpolate} vznikat vizuální artefakty, především na okrajích snímků a objektů. Při zpracování přednášek Donalda Knutha na \acro{FI MU} jsem proto ze vstupního videa nejprve vytvořil obrázky snímků:
 \begin{mintedblock}
 \inputminted{bash}{example-minterpolate-frames-01.sh}
@@ -38,4 +50,4 @@ Následně jsem obrázky snímků ručně prošel a smazal jsem ty, na kterých 
 \inputminted{bash}{example-minterpolate-frames-02.sh}
 \end{mintedblock}
 \noindent
-Video mělo proměnlivou frekvenci 25--50 snímků za vteřinu podle počtu smazaných obrázků snímků v dané části videa.}
+Video mělo proměnlivou frekvenci 25--50 snímků za sekundu podle počtu smazaných obrázků.}

@@ -10,10 +10,11 @@
 \begin{subfigure}{\linewidth}
 \begingroup
 \small
-\begin{verbatim}
+\begin{Verbatim}[commandchars=|\{\}]
 $ ffmpeg -i vstupní-video.mp4 -vf vidstabdetect -f null -
-$ ffmpeg -i vstupní-video.mp4 -vf vidstabtransform výstupní-video.mp4
-\end{verbatim}
+$ ffmpeg -i vstupní-video.mp4 -vf vidstabtransform výstupní-video.mp4|footnotemark{}
+\end{Verbatim}
+\vspace{-4pt}%
 \endgroup
 \input images/frames/output-vidstabtransform-frames
 \caption{Filtry \texttt{vidstabdetect} a \texttt{vidstabtransform} izolují a odstraňují rychlé pohyby kamery. Dále dochází k přiblížení obrazu tak, aby nebyly viditelné okraje záběru.}
