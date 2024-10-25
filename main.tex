@@ -9,6 +9,8 @@
 \let\oldlooseness=\looseness
 \documentclass{csbulletin}
 \setcounter{secnumdepth}{3}
+\usepackage{titlesec}
+\titlelabel{\thetitle\enspace}
 \usepackage{luavlna,float}
 \usepackage[strict]{lua-widow-control}
 
@@ -114,7 +116,7 @@ Nejprve v sekci~\ref{sec:akvizice} popisuji akvizici a zpracování surových au
 \section{Akvizice a zpracování videa a zvuku}
 \label{sec:akvizice}
 \vspace{-5pt}
-Video a zvuk představení zaznamenali a předzpracovali Pavel Šiler, Petr „Tudy“ Holubář a studenti laboratoře \acro{LEMMA}~\cite{LEMMA}. Následně jsem u videa sjednotil formát dat a do zvuku jsem přimíchal zvuky okolí a úvodní slovo Jiřího Zlatušky.
+Video a zvuk představení zaznamenali a předzpracovali Pavel Šiler, Petr „Tudy“ Holubář a studenti laboratoře \acro{LEMMA}~\cite{LEMMA}. Poté jsem u videa sjednotil formát dat a do zvuku jsem přimíchal zvuky okolí a úvodní slovo Jiřího Zlatušky.
 
 \vspace{-10pt}
 \subsection{Záznam videa}
@@ -128,7 +130,7 @@ Záznamy přednášek jsem obdržel v prokládaném (tzv. „interlaced“) form
 Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným nástrojem waifu2x~\cite{waifu2x}, vizte obrázky~\ref{fig:ffmpeg-waifu2x}--\ref{fig:minterpolate-yadif}. Nejprve jsem stabilizoval záběry z ruky filtry \texttt{vidstabdetect}~\cite{vidstabdetect} a~\texttt{vidstab\discretionary{\textrm{-}}{}{}transform}~\cite{vidstabtransform} nástroje FFmpeg. Potom jsem navýšil rozlišení a snímkovou frekvenci následujícím způsobem:\footnote{Navýšené rozlišení a především snímková frekvence jsou jen iluze. Proto upravené video tvoří jen ca 7 minut ze 104minutového videozáznamu. Zbylých 97 minut tvoří animované panely, které mají nativní rozlišení \acro{4K} a snímkovou frekvenci 50 snímků za sekundu.}
 \begin{itemize}
 \item U neprokládaných videí jsem nejprve navýšil rozlišení nástrojem waifu2x. Následně jsem navýšil snímkovou frekvenci filtrem \texttt{minterpolate}~\cite{minterpolate} nástroje FFmpeg, který chybějící snímky interpoluje podle okolních snímků.
-\item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpoluje podle okolních půlsnímků a řádků. Následně jsem navýšil rozlišení nástrojem waifu2x.
+\item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpoluje podle okolních půlsnímků a řádků. Nakonec jsem navýšil rozlišení nástrojem waifu2x.
 \end{itemize}
 
 \input images/ffmpeg-waifu2x
@@ -176,7 +178,7 @@ Filtr \texttt{ass}~\cite{ass} implementuje softwarová knihovna \texttt{libass}~
 \section{Příprava panelů doprovázejících varhanní oratorium}
 \label{sec:panely}
 
-Představení doprovázela projekce na dvou panelech: První panel zobrazoval text Janovy Apokalypsy v novozákonní řečtině a anglickém předkladu a druhý panel zobrazoval ilustrace Duane Bibbyho.
+Představení doprovázela projekce na dvou panelech: První panel zobrazoval text Janovy Apokalypsy v novozákonní řečtině a anglickém překladu a druhý panel zobrazoval ilustrace Duane Bibbyho.
 
 Ve videozáznamu jsme panely oproti představení obohatili takto:
 \begin{enumerate}
@@ -198,7 +200,7 @@ Aby řecký a anglický text tvořily horní dvě barvy české trikolory, nejpr
 Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u, písma Slabo od písmolijny Tiro Typeworks a nástroje ImageMagick~\cite{imagemagick} jsem vytvořil dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
 
 \subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
-Ilustrace Duanea Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdfimages. Následně jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
+Ilustrace Duanea Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdfimages. Poté jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
 \begingroup
 \small
 \begin{verbatim}
@@ -214,7 +216,7 @@ Nejprve jsem pro všechny následující páry obrázků z panelů s textem a il
 
 \input images/transition/figure
 
-Následně jsem obrázky z panelů s textem a ilustracemi synchonizoval se zvukem představení ve svobodném programu Flowblade~\cite{flowblade} pro digitální střih videa, vizte Obrázek~\ref{fig:flowblade}.%
+Posléze jsem obrázky z panelů s textem a ilustracemi synchonizoval se zvukem představení ve svobodném programu Flowblade~\cite{flowblade} pro digitální střih videa, vizte Obrázek~\ref{fig:flowblade}.%
 \begin{sideways-figure}{fig:flowblade}
 \includegraphics[width=\linewidth]{flowblade}
 \caption{Synchronizace panelů s textem a ilustracemi se zvukem představení ve svobodném programu Flowblade.}
@@ -279,7 +281,7 @@ Pro každou z 22 kapitol si Tomáš Szaniszlo na počítači otevřel digitalizo
 \caption{Videozáznam not pro varhany od Tomáše Szaniszlo.}
 \end{sideways-figure}
 
-Tato videa jsem nástrojem FFmpeg seříznul z 1920\,px na 1344\,px, aby zmizely postranní šedivé okraje:
+Tato videa jsem nástrojem FFmpeg seřízl z 1920\,px na 1344\,px, aby zmizely postranní šedivé okraje:
 \begin{verbatim}
 $ ffmpeg -i vstupní-video.mp4                                    \
 >        -vf 'crop=1344:1076:280:4,
@@ -287,7 +289,7 @@ $ ffmpeg -i vstupní-video.mp4                                    \
 >          výstupní-video.mp4
 \end{verbatim}
 
-Dále jsem do horní části videí doplnil bílý obdélník o výšce 62\,px, který na začátku videa překrývá horní šedivý okraj a následně se změní na poloprůhledný obdélník, který přechází od plné neprůhlednosti ve své horní části po plnou průhlednost ve své spodní části a tvoří tak měkký předěl mezi notami a ilustracemi:
+Dále jsem do horní části videí doplnil bílý obdélník o výšce 62\,px, který na začátku videa překrývá horní šedivý okraj a pak se změní na poloprůhledný obdélník, který přechází od plné neprůhlednosti ve své horní části po plnou průhlednost ve své spodní části a tvoří tak měkký předěl mezi notami a ilustracemi:
 \begin{Verbatim}[commandchars=|\{\}]
 $ ffmpeg -i vstupní-video.mp4 \
 >        -vf "drawbox=0:0:1920:62:white:fill:enable='lte(n,$N|footnotemark{})',
