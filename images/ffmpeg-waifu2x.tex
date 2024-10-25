@@ -27,12 +27,14 @@
 \end{filecontents}
 \addtocounter{footnote}{-1}
 \ClassWarning{csbulletin}{Make sure that the footnote text is on the left-hand page and the footnote mark is on the right-hand page, i.e. they are both visible at the same time}
+\ifFirstRun\else
 \footnotetext{Všechny příkazy nástroje FFmpeg používají navíc následující výstupní parametry:
 \begin{mintedblock}
 \inputminted{bash}{output-parameters.sh}
 \end{mintedblock}
 \noindent
 Tyto parametry zajišťují vizuálně a auditivně bezztrátovou kompresi videa a zvuku.}
+\fi
 \begin{filecontents}[overwrite,nosearch,noheader]{example-minterpolate-frames-01.sh}
 $ ffmpeg -i vstupní-video.mp4 -vf minterpolate obrázky-snímků/%06d.png
 \end{filecontents}
