@@ -110,7 +110,7 @@ V tomto článku popisuji přípravu záznamu od akvizice a zpracování surový
 
 11. října 2019 se v jezuitském kostele Nanebevzetí Panny Marie uskutečnila česká premiéra multimediálního díla ,,Fantasia Apocalyptica``~\cite{knuth2023fantasia} za osobní účasti autora, Donalda Knutha. Z představení byl pořízen záznam, který je veřejně dostupný na YouTube kanálu Fakulty informatiky Masarykovy univerzity~(\acro{FI~MU})~\cite{fimu2020czech}. Předchozí články ve Zpravodaji \CSTUG u popisují průběh představení~\cite{luptak2019fantasia} a přednášek Donalda Knutha při příležitosti návštěvy Brna~\cite{szaniszlo2020dva}. V tomto článku popisuji přípravu záznamu představení.
 
-Nejprve v sekci~\ref{sec:akvizice} popisuji akvizici a zpracování surových audiovizuálních dat. Následně v sekci~\vref{sec:uvodni-slovo-a-zaver} popisuji přípravu videozáznamu úvodního slova a závěru představení. Dále v sekci~\vref{sec:panely} popisuji přípravu panelů doprovázejících představení. Nakonec v sekci~\vref{sec:spojeni} popisuji spojení jednotlivých částí do výsledného záznamu. V sekci \vref{sec:zaver} shrnuji poznatky z článku a popisuji promítání hotového videozáznamu na \acro{FI~MU} 18. prosince 2019.
+Nejprve v sekci~\ref{sec:akvizice} popisuji akvizici a zpracování surových audiovizuálních dat. Následně v sekci~\vref{sec:uvodni-slovo-a-zaver} popisuji přípravu videozáznamu úvodního slova a závěru představení. Dále v sekci~\vref{sec:panely} popisuji přípravu panelů doprovázejících představení. Nakonec v sekci~\vref{sec:spojeni} popisuji spojení jednotlivých částí do výsledného záznamu. V sekci \vref{sec:zaver} popisuji promítání hotového videozáznamu na \acro{FI~MU} 18. prosince 2019.
 
 \vspace{-10pt}
 \section{Akvizice a zpracování videa a zvuku}
@@ -243,9 +243,6 @@ for producer in strom.findall('.//producer'):
 with open('časování-ilustrací.txt', 'wt') as f1, \
         open('časování-řeckého-a-anglického-textu.txt', 'wt') as f2, \
         open('časování-českého-textu.txt', 'wt') as f3:
-\end{minted}
-\endgroup
-\begin{minted}{python}
     for obrazek, trvani in sorted(obrazky.items()):
         if obrazek.parent.name == 'ilustrace':
             print(f'{obrazek.name}\t{trvani}', file=f1)
@@ -253,6 +250,7 @@ with open('časování-ilustrací.txt', 'wt') as f1, \
             print(f'{obrazek.name}\t{trvani}', file=f2)
             print(f'{obrazek.name}\t{trvani}', file=f3)
 \end{minted}
+\endgroup
 \end{mintedblock}
 
 Jeden řádek výstupního souboru \texttt{časování-ilustrací.txt} je např. \texttt{194.png 1119}. To znamená, že obrázek \texttt{ilustrace/194.png} s ilustrací verše 21:8 trvá 1\,119 snímků videa, což je při frekvenci 50 snímků za sekundu přibližně 22 sekund.
