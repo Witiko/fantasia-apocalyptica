@@ -27,17 +27,6 @@
   \par\vspace{\topsep}\vspace{\partopsep}%
 }
 
-\newif\ifFirstRun
-\makeatletter
-\AtBeginDocument{%
-  \ifx\FirstRunTest\@undefined
-    \FirstRuntrue
-  \else
-    \FirstRunfalse
-  \fi
-  \write\@auxout{\string\gdef\string\FirstRunTest{}}%
-}
-
 \usepackage{csquotes}
 \usepackage[
   backend=biber,
