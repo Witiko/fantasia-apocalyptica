@@ -133,7 +133,12 @@ Video jsem zpracoval svobodným nástrojem FFmpeg~\cite{ffmpeg} a otevřeným n�
 \item U prokládaných videí jsem nejprve navýšil snímkovou frekvenci filtrem \texttt{yadif}~\cite{yadif}, který chybějící půlsnímky interpoluje podle okolních půlsnímků a řádků. Nakonec jsem navýšil rozlišení nástrojem waifu2x.
 \end{itemize}
 
-\input images/ffmpeg-waifu2x
+\begin{figure}[t!]
+\vspace{-10pt}
+\input images/ffmpeg-waifu2x-activity-diagram
+\caption{Diagram aktivit zpracování videa pomocí nástrojů FFmpeg a waifu2x.}
+\label{fig:ffmpeg-waifu2x}
+\end{figure}
 
 \subsection{Záznam zvuku}
 Zvuk představení byl zaznamenán šesti mikrofony:
@@ -146,12 +151,7 @@ Zvuk představení byl zaznamenán šesti mikrofony:
 Zvuk předzpracoval Petr „Tudy“ Holubář~\cite{2019-10-11-audio-Fantasia-apocalyptica-Mix-Tudio}. Hlavním vstupem jeho mixu byl prostorový záznam z mikrofonů Oktava~\acro{MK012}. Do prostorového záznamu Petr pro konkrétnost lehce přimíchal přímý záznam varhan z mikrofonu Roland~\acro{R26}, který frekvenčně ošetřil tak, aby se neprojevily nežádoucí fázové posuny ve spodním pásmu. Pro zúžení dynamického rozsahu použil Petr digitální \acro{VST} modul \acro{SSL}~G-Master Buss Compressor~\cite{ssl-g-master-buss-compressor} od firmy Waves Audio.
 
 \subsection{Zpracování zvuku}
-Zvuk jsem zpracoval svobodným programem Audacity~\cite{2019-11-19-audio-Fantasia-apocalyptica-Mix-Novotny,2019-12-09-audio-Fantasia-apocalyptica-Mix-Novotny}, vizte Obrázek~\ref{fig:audacity}.%
-\begin{sideways-figure}{fig:audacity}
-\includegraphics[width=\linewidth]{audacity}
-\caption{Zpracování zvuku ve svobodném programu Audacity. Výsledný mix zahrnuje zvuk zvonu (nahoře), předzpracovaný zvuk představení od Petra „Tudy“ Holubáře (druhý odshora) a úvodní slovo Jiřího Zlatušky (uprostřed) podkreslené zvuky okolí (dole).}
-\end{sideways-figure}
-Výsledný mix zahrnuje svobodný zvuk zvonu kostnické katedrály~\cite{edsward2016church}, předzpracovaný zvuk představení od Petra Holubáře a úvodní slovo Jiřího Zlatušky podkreslené zvuky okolí z mikrofonů Oktava~\acro{MK012}.
+Zvuk jsem zpracoval svobodným programem Audacity~\cite{2019-11-19-audio-Fantasia-apocalyptica-Mix-Novotny,2019-12-09-audio-Fantasia-apocalyptica-Mix-Novotny}, vizte Obrázek~\ref{fig:audacity}. Výsledný mix zahrnuje svobodný zvuk zvonu kostnické katedrály~\cite{edsward2016church}, předzpracovaný zvuk představení od Petra Holubáře a úvodní slovo Jiřího Zlatušky podkreslené zvuky okolí z mikrofonů Oktava~\acro{MK012}.
 
 \section{Příprava videozáznamu úvodního slova a závěru}
 \label{sec:uvodni-slovo-a-zaver}
@@ -170,6 +170,14 @@ $ ffmpeg -i vstupní-video.mp4 -vf ass=vstupní-titulky.ass video-s-titulky.mp4
 \end{mintedblock}
 \noindent
 Filtr \texttt{ass}~\cite{ass} implementuje softwarová knihovna \texttt{libass}~\cite{libass}, která ve výchozím nastavení nepoužívá kerningovou tabulku použitého písma~\cite{enable-kerning-by-default}. Pro použití kerningové tabulky je třeba do sekce \texttt{[Script Info]} souboru \texttt{vstupní-titulky.ass} přidat řádek \texttt{Kerning: yes}.}~\cite{2019-12-12-titulky-Novotny}, které jsem připravil ve svobodném nástroji Aegisub~\cite{aegisub}, vizte Obrázek~\ref{fig:aegisub}.
+
+\input images/ffmpeg-waifu2x
+
+\begin{sideways-figure}{fig:audacity}
+\includegraphics[width=\linewidth]{audacity}
+\caption{Zpracování zvuku ve svobodném programu Audacity. Výsledný mix zahrnuje zvuk zvonu (nahoře), předzpracovaný zvuk představení od Petra „Tudy“ Holubáře (druhý odshora) a úvodní slovo Jiřího Zlatušky (uprostřed) podkreslené zvuky okolí (dole).}
+\end{sideways-figure}
+
 \begin{sideways-figure}{fig:aegisub}
 \includegraphics[width=\linewidth]{aegisub}
 \caption{Příprava titulků úvodního slova ve svobodném programu Aegisub.}
