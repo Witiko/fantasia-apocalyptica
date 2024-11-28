@@ -22,7 +22,11 @@
 \ClassWarning{csbulletin}{Make sure that the footnote text is on the left-hand page and the footnote mark is on the right-hand page, i.e. they are both visible at the same time}
 \footnotetext{Všechny příkazy nástroje FFmpeg používají navíc následující výstupní parametry:
 \begin{mintedblock}
+\begingroup
+\SetTracking{encoding = *}{-4}%
+\lsstyle
 \inputminted{bash}{output-parameters.sh}
+\endgroup
 \end{mintedblock}
 \noindent
 Tyto parametry zajišťují vizuálně a auditivně bezztrátovou kompresi videa~\cite{ffmpeg-h265} a zvuku~\cite{ffmpeg-aac}.}
