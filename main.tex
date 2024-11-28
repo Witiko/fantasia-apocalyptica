@@ -175,7 +175,7 @@ Filtr \texttt{ass}~\cite{ass} implementuje softwarová knihovna \texttt{libass}~
 \section{Příprava panelů doprovázejících varhanní oratorium}
 \label{sec:panely}
 
-Představení doprovázela projekce na dvou panelech: První panel zobrazoval text Janovy Apokalypsy v novozákonní řečtině a anglickém překladu a druhý panel zobrazoval ilustrace Duane Bibbyho.
+Představení doprovázela projekce na dvou panelech: První panel zobrazoval text Janovy Apokalypsy v novozákonní řečtině a anglickém překladu a druhý panel zobrazoval ilustrace Duane Bibbyho.\footnote{Ilustrace Duane Bibbyho vyšly také v knize \emph{Fantasia Apocalyptica Illustrated}~\cite{knuth2018fantasia}, kterou je možné zakoupit např. na českém e-shopu \href{https://www.bookshop.cz/centre-for-the-study-of-language-a-information/fantasia-apocalyptica-illustrated/}{\texttt{bookshop.cz}}.}
 
 Ve videozáznamu jsme panely oproti představení obohatili takto:
 \begin{enumerate}
@@ -189,6 +189,7 @@ V této sekci popisuji proces přípravy panelů použitých ve videozáznamu.
 
 \input images/screen2-texts
 
+\vspace{-10pt}
 \subsection{Příprava panelu s trojjazyčným textem Zjevení Janova}
 Pro řecký a anglický text jsem použil \acro{PDF} dokument~\cite{morland2018fantasia} z kanadské premiéry, který zobrazuje nejprve řecký text na světle žlutém poli a pod ním anglický text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-greek-and-english-original}.
 
@@ -196,6 +197,7 @@ Aby řecký a anglický text tvořily horní dvě barvy české trikolory, nejpr
 
 Pro český text jsem se svolením České biblické společnosti použil český ekumenický překlad. Pomocí \TeX u, písma Slabo od písmolijny Tiro Typeworks a nástroje ImageMagick~\cite{imagemagick} jsem vytvořil dokument, který vzhledově odpovídá řeckému a anglickému textu a který zobrazuje text na modrém poli, vizte Obrázek~\ref{fig:screen2-texts-czech}.
 
+\vspace{-10pt}
 \subsection{Příprava panelu s ilustracemi Duanea Bibbyho}
 Ilustrace Duanea Bibbyho~\cite{bibby2018fantasia} jsem nejprve extrahoval z dokumentu \acro{PDF} pomocí svobodného nástroje pdf\/images. Poté jsem navýšil jejich rozlišení pomocí nástroje waifu2x podobně jako na Obrázku~\ref{fig:waifu2x}:
 \begingroup
@@ -208,6 +210,7 @@ $ th waifu2x.lua -l ilustrace.txt -model_dir models/anime_style_art_rgb \
 \end{verbatim}
 \endgroup
 
+\vspace{-10pt}
 \subsection{Animace panelů s textem a ilustracemi}
 Nejprve jsem pro všechny následující páry obrázků z panelů s textem a ilustracemi vygeneroval nástrojem FFmpeg videa s animacemi přechodu, vizte Obrázek~\ref{fig:transition}.
 
