@@ -299,7 +299,7 @@ $ ffmpeg -i vstupní-video.mp4 \
 \end{Verbatim}
 \footnotetext{Proměnná \texttt{\$N} značí snímek, po kterém se obdélník změní na poloprůhledný, a liší se pro jednotlivá videa not. Např. ve videu pro 21. kapitolu jsem nastavil \texttt{N=2700}. Při frekvenci 50 snímků za sekundu tedy dojde ke změně po 54 sekundách, kdy již Tomáš posunul noty tak, že horní šedivý okraj není vidět.}
 
-Poté jsem videa sestříhal a synchonizoval se zvukem představení v programu Flowblade podobně jako v předchozí sekci. Výsledné video jsem vykreslil nástrojem Melt z knihovny \acro{MLT}:
+Poté jsem videa sestříhal a synchronizoval se zvukem představení v programu Flowblade podobně jako v předchozí sekci. Výsledné video jsem vykreslil nástrojem Melt z knihovny \acro{MLT}:
 \begin{verbatim}
 $ melt vstupní-projekt.xml -consumer avformat:výstupní-video.mp4 \
 >      vcodec=libx265 crf=17 preset=veryslow pix_fmt=yuv420p     \
